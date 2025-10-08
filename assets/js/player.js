@@ -142,8 +142,12 @@ class NetflixVideoPlayer {
     bindControlButtons() {
         // Play/Pause button
         const playPauseBtn = document.getElementById('play-pause-btn');
+        const bigPlayBtn = document.getElementById('big-play-btn');
         if (playPauseBtn) {
             playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+        }
+        if (bigPlayBtn) {
+            bigPlayBtn.addEventListener('click', () => this.togglePlayPause());
         }
 
         // Fullscreen button
@@ -494,6 +498,7 @@ class NetflixVideoPlayer {
 
     updatePlayPauseButton() {
         const playPauseBtn = document.getElementById('play-pause-btn');
+        const bigPlayBtn = document.getElementById('big-play-btn');
         if (playPauseBtn) {
             const svg = playPauseBtn.querySelector('svg path');
             if (svg) {
@@ -503,6 +508,11 @@ class NetflixVideoPlayer {
                     svg.setAttribute('d', 'M6 4H10V20H6V4ZM14 4H18V20H14V4Z');
                 }
             }
+        }
+        if (bigPlayBtn) {
+            bigPlayBtn.querySelector('.play-icon').textContent = this.isPlaying ? '⏸' : '▶';
+            bigPlayBtn.style.opacity = this.isPlaying ? '0' : '1';
+            bigPlayBtn.style.pointerEvents = this.isPlaying ? 'none' : 'auto';
         }
     }
 

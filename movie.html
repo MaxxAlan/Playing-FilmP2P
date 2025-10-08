@@ -11,20 +11,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <main>
+<body class="netflix-player">
+    
+
+    <!-- Main Video Player -->
+    <main class="netflix-main" style="padding-top: 0;">
         <div class="video-player-container">
-            <div class="video-wrapper">
-                <div class="video-controls-overlay">
-                    <button class="control-btn" id="play-pause-btn" aria-label="Phát/Tạm dừng">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+            <div class="video-wrapper" id="video-container">
+                <!-- Video iframe sẽ được thêm bởi JavaScript -->
+                <button class="video-controls-overlay" id="big-play-btn" aria-label="Play / Pause">
+                    <span class="play-icon">▶</span>
+                </button>
+            </div>
+            
+            <!-- Video Controls Overlay -->
+            <div class="video-controls" id="video-controls">
+                <div class="controls-top">
+                    <div class="video-title" id="video-title">Đang tải...</div>
+                    <div class="video-actions">
+                        <button class="control-btn" id="play-pause-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="volume-control-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M19.07 4.93C20.944 6.8 22 9.27 22 12C22 14.73 20.944 17.2 19.07 19.07M15.54 8.46C16.477 9.4 17 10.66 17 12C17 13.34 16.477 14.6 15.54 15.54" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="fullscreen-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 3H5C3.89543 3 3 3.89543 3 5V8M21 8V5C21 3.89543 20.1046 3 19 3H16M16 21H19C20.1046 21 21 20.1046 21 19V16M3 16V19C3 20.1046 3.89543 21 5 21H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div id="video-container"><!-- iframe sẽ được JS chèn vào --></div>
+                
+                <div class="controls-bottom">
+                    <div class="progress-container">
+                        <div class="time-display" id="current-time">0:00</div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar" id="progress-bar">
+                                <div class="progress-filled" id="progress-filled"></div>
+                                <div class="progress-handle" id="progress-handle"></div>
+                            </div>
+                        </div>
+                        <div class="time-display" id="total-time">0:00</div>
+                    </div>
+                    
+                    <div class="controls-row">
+                        <button class="control-btn" id="rewind-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polygon points="11,19 2,12 11,5 11,19"/>
+                                <polygon points="22,19 13,12 22,5 22,19"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="forward-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <polygon points="13,19 22,12 13,5 13,19"/>
+                                <polygon points="2,19 11,12 2,5 2,19"/>
+                            </svg>
+                        </button>
+                        <div class="volume-container">
+                            <div class="volume-slider-wrapper">
+                                <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="100">
+                            </div>
+                        </div>
+                        <button class="control-btn" id="subtitle-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6H20V8H4V6ZM4 10H20V12H4V10ZM4 14H16V16H4V14Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="control-btn" id="quality-btn">
+                            <span>HD</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
+            <!-- Loading Overlay -->
             <div class="loading-overlay" id="loading-overlay">
                 <div class="loading-spinner">
                     <div class="spinner-ring"></div>
@@ -34,6 +100,7 @@
                 <p>Đang tải video...</p>
             </div>
 
+            <!-- Error Overlay -->
             <div class="error-overlay" id="error-overlay" style="display: none;">
                 <div class="error-content">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
@@ -47,8 +114,52 @@
                 </div>
             </div>
         </div>
+
+        <!-- Movie Details Panel -->
+        <div class="movie-details-panel">
+            <div class="movie-info">
+                <div class="movie-header">
+                    <h1 id="movie-title-detail">Đang tải...</h1>
+                    <div class="movie-meta">
+                        <span id="movie-year" class="meta-item">2024</span>
+                        <span id="movie-duration" class="meta-item">120 phút</span>
+                        <span id="movie-rating" class="meta-item rating">⭐ 8.5</span>
+                    </div>
+                </div>
+                
+                <div class="movie-description">
+                    <p id="movie-description">Đang tải mô tả...</p>
+                </div>
+
+                <div class="movie-genres">
+                    <div id="movie-genres" class="genre-tags"></div>
+                </div>
+
+                <div class="movie-actions">
+                    <button class="action-btn primary" id="play-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Phát
+                    </button>
+                    <button class="action-btn secondary" id="add-to-list-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Danh sách
+                    </button>
+                    <button class="action-btn secondary" id="share-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 12V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V12M16 8L12 4M12 4L8 8M12 4V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Chia sẻ
+                    </button>
+                </div>
+            </div>
+        </div>
     </main>
 
+    <!-- Toast Notifications -->
     <div class="toast-container" id="toast-container"></div>
 
     <script src="assets/js/utils.js"></script>
