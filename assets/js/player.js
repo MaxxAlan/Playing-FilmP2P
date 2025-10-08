@@ -29,7 +29,10 @@ class NetflixVideoPlayer {
             await this.loadMovies();
             this.setupPlayer();
             this.bindEvents();
+            this.setupTouchGestures();
+            this.detectOrientation();
             this.loadMovie();
+            this.showTouchHint();
         } catch (error) {
             console.error('Lỗi khi khởi tạo player:', error);
             this.showError('Không thể tải video player');
@@ -64,13 +67,15 @@ class NetflixVideoPlayer {
         this.iframe.addEventListener('load', () => {
             this.hideLoading();
             this.showToast('Video đã sẵn sàng', 'success', 2000);
+            this.startProgressTracking();
         });
 
         this.iframe.addEventListener('error', () => {
             this.showError('Không thể tải video từ Google Drive');
         });
 
-        // No simulated progress; iframe playback managed by provider
+        // Setup progress tracking simulation
+        this.setupProgressSimulation();
     }
 
     bindEvents() {
@@ -107,6 +112,25 @@ class NetflixVideoPlayer {
             this.updateUIForFullscreen();
         });
 
+        // Orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.detectOrientation();
+                this.updateUIForOrientation();
+            }, 100);
+        });
+
+        // Resize events
+        window.addEventListener('resize', () => {
+            this.detectOrientation();
+            this.updateUIForOrientation();
+        });
+
+        // Lưu tiến độ xem khi rời khỏi trang
+        window.addEventListener('beforeunload', () => {
+            this.saveWatchProgress();
+        });
+
         // Visibility change (tab switching)
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -138,7 +162,35 @@ class NetflixVideoPlayer {
             volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
         }
 
-        // Ignore non-functional controls: progress/seek, rewind/forward, subtitle, quality
+        // Progress bar
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) {
+            progressBar.addEventListener('click', (e) => this.seekTo(e));
+            progressBar.addEventListener('mousedown', () => this.isDragging = true);
+            progressBar.addEventListener('mouseup', () => this.isDragging = false);
+        }
+
+        // Rewind/Forward buttons
+        const rewindBtn = document.getElementById('rewind-btn');
+        const forwardBtn = document.getElementById('forward-btn');
+        if (rewindBtn) {
+            rewindBtn.addEventListener('click', () => this.rewind(10));
+        }
+        if (forwardBtn) {
+            forwardBtn.addEventListener('click', () => this.forward(10));
+        }
+
+        // Subtitle button
+        const subtitleBtn = document.getElementById('subtitle-btn');
+        if (subtitleBtn) {
+            subtitleBtn.addEventListener('click', () => this.toggleSubtitles());
+        }
+
+        // Quality button
+        const qualityBtn = document.getElementById('quality-btn');
+        if (qualityBtn) {
+            qualityBtn.addEventListener('click', () => this.toggleQuality());
+        }
 
         // Action buttons
         const playBtn = document.getElementById('play-btn');
@@ -171,6 +223,7 @@ class NetflixVideoPlayer {
 
         this.displayMovieInfo();
         this.loadVideo();
+        this.loadWatchProgress();
     }
 
     displayMovieInfo() {
@@ -299,7 +352,30 @@ class NetflixVideoPlayer {
         }
     }
 
-    
+    saveWatchProgress() {
+        // Lưu thời gian xem hiện tại (nếu có thể)
+        if (this.currentMovie) {
+            const progress = {
+                movieId: this.currentMovie.id,
+                timestamp: Date.now()
+            };
+            Utils.saveToStorage(`progress_${this.currentMovie.id}`, progress);
+        }
+    }
+
+    loadWatchProgress() {
+        if (this.currentMovie) {
+            const progress = Utils.getFromStorage(`progress_${this.currentMovie.id}`);
+            if (progress) {
+                const timeAgo = Date.now() - progress.timestamp;
+                const hoursAgo = timeAgo / (1000 * 60 * 60);
+                
+                if (hoursAgo < 24) {
+                    Utils.showToast('Có tiến độ xem trước đó', 'info', 3000);
+                }
+            }
+        }
+    }
 
     showLoading() {
         // Dùng overlay có sẵn trong HTML (#loading-overlay)
@@ -328,7 +404,48 @@ class NetflixVideoPlayer {
         }
     }
 
-    
+    // Touch Gestures
+    setupTouchGestures() {
+        const videoWrapper = document.getElementById('video-container');
+        if (!videoWrapper) return;
+
+        videoWrapper.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+            this.touchStartY = e.touches[0].clientY;
+            this.touchStartTime = Date.now();
+        }, { passive: true });
+
+        videoWrapper.addEventListener('touchend', (e) => {
+            if (Date.now() - this.touchStartTime < 300) {
+                // Single tap - toggle controls
+                this.toggleControls();
+            }
+        }, { passive: true });
+
+        videoWrapper.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const deltaX = e.touches[0].clientX - this.touchStartX;
+                const deltaY = e.touches[0].clientY - this.touchStartY;
+                
+                // Horizontal swipe for seeking
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    e.preventDefault();
+                    if (deltaX > 0) {
+                        this.forward(Math.abs(deltaX) / 10);
+                    } else {
+                        this.rewind(Math.abs(deltaX) / 10);
+                    }
+                }
+                
+                // Vertical swipe for volume
+                if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
+                    e.preventDefault();
+                    const volumeChange = deltaY > 0 ? -5 : 5;
+                    this.adjustVolume(volumeChange);
+                }
+            }
+        }, { passive: false });
+    }
 
     // Control Methods
     toggleControls() {
@@ -480,9 +597,57 @@ class NetflixVideoPlayer {
         }
     }
 
-    
+    seekTo(e) {
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) {
+            const rect = progressBar.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const percentage = clickX / rect.width;
+            this.currentTime = this.duration * percentage;
+            this.updateProgress();
+            this.showToast(`Chuyển đến ${this.formatTime(this.currentTime)}`, 'info', 1000);
+        }
+    }
 
-    
+    rewind(seconds) {
+        this.currentTime = Math.max(0, this.currentTime - seconds);
+        this.updateProgress();
+        this.showToast(`Tua lại ${seconds}s`, 'info', 1000);
+    }
+
+    forward(seconds) {
+        this.currentTime = Math.min(this.duration, this.currentTime + seconds);
+        this.updateProgress();
+        this.showToast(`Tua nhanh ${seconds}s`, 'info', 1000);
+    }
+
+    toggleSubtitles() {
+        this.subtitles = !this.subtitles;
+        const subtitleBtn = document.getElementById('subtitle-btn');
+        if (subtitleBtn) {
+            subtitleBtn.classList.toggle('active', this.subtitles);
+        }
+        
+        if (this.subtitles) {
+            this.showToast('Đã bật phụ đề', 'info', 1000);
+        } else {
+            this.showToast('Đã tắt phụ đề', 'info', 1000);
+        }
+    }
+
+    toggleQuality() {
+        const qualities = ['SD', 'HD', 'Full HD'];
+        const currentIndex = qualities.indexOf(this.quality);
+        const nextIndex = (currentIndex + 1) % qualities.length;
+        this.quality = qualities[nextIndex];
+        
+        const qualityBtn = document.getElementById('quality-btn');
+        if (qualityBtn) {
+            qualityBtn.textContent = this.quality;
+        }
+        
+        this.showToast(`Chất lượng: ${this.quality}`, 'info', 1000);
+    }
 
     addToList() {
         this.showToast('Đã thêm vào danh sách', 'success', 2000);
@@ -503,7 +668,59 @@ class NetflixVideoPlayer {
         }
     }
 
-    
+    // Progress and Time Management
+    setupProgressSimulation() {
+        this.duration = 7200; // 2 hours in seconds (simulated)
+        this.currentTime = 0;
+        
+        setInterval(() => {
+            if (this.isPlaying && !this.isDragging) {
+                this.currentTime += 1;
+                this.updateProgress();
+            }
+        }, 1000);
+    }
+
+    startProgressTracking() {
+        this.currentTime = 0;
+        this.updateProgress();
+    }
+
+    updateProgress() {
+        const progressFilled = document.getElementById('progress-filled');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalTimeEl = document.getElementById('total-time');
+        
+        if (progressFilled) {
+            const percentage = (this.currentTime / this.duration) * 100;
+            progressFilled.style.width = `${percentage}%`;
+        }
+        
+        if (currentTimeEl) {
+            currentTimeEl.textContent = this.formatTime(this.currentTime);
+        }
+        
+        if (totalTimeEl) {
+            totalTimeEl.textContent = this.formatTime(this.duration);
+        }
+    }
+
+    formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = Math.floor(seconds % 60);
+        
+        if (hours > 0) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        } else {
+            return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+    }
+
+    // Orientation and UI Management
+    detectOrientation() {
+        this.isLandscape = window.innerWidth > window.innerHeight;
+    }
 
     updateUIForFullscreen() {
         const nav = document.querySelector('.netflix-nav');
@@ -517,7 +734,28 @@ class NetflixVideoPlayer {
             if (detailsPanel) detailsPanel.style.display = 'block';
         }
     }
-    
+
+    updateUIForOrientation() {
+        const detailsPanel = document.querySelector('.movie-details-panel');
+        
+        if (this.isLandscape && window.innerWidth <= 768) {
+            if (detailsPanel) detailsPanel.style.display = 'none';
+        } else {
+            if (detailsPanel) detailsPanel.style.display = 'block';
+        }
+    }
+
+    showTouchHint() {
+        if (window.innerWidth <= 480) {
+            const videoWrapper = document.getElementById('video-container');
+            if (videoWrapper) {
+                videoWrapper.classList.add('show-hint');
+                this.showHintTimeout = setTimeout(() => {
+                    videoWrapper.classList.remove('show-hint');
+                }, 3000);
+            }
+        }
+    }
 
     // Toast Notifications
     showToast(message, type = 'info', duration = 3000) {
@@ -540,6 +778,7 @@ class NetflixVideoPlayer {
         }, duration);
     }
 
+    // Keyboard Controls
     handleKeyboard(e) {
         switch (e.code) {
             case 'Space':
@@ -553,6 +792,22 @@ class NetflixVideoPlayer {
             case 'KeyM':
                 e.preventDefault();
                 this.toggleMute();
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                this.rewind(10);
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                this.forward(10);
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                this.adjustVolume(5);
+                break;
+            case 'ArrowDown':
+                e.preventDefault();
+                this.adjustVolume(-5);
                 break;
             case 'Escape':
                 if (this.isFullscreen) {
