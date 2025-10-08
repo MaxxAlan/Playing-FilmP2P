@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Phim Online - Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="player-page">
+    <header class="player-header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Quay lại</a>
+            <h1 id="movie-title">Đang tải...</h1>
+        </div>
+    </header>
+
+    <main class="player-main">
+        <div class="video-container">
+            <!-- Google Drive iframe sẽ được thêm bởi JavaScript -->
+        </div>
+
+        <div class="movie-info-panel">
+            <div class="movie-details">
+                <div class="movie-meta">
+                    <span id="movie-year" class="year"></span>
+                    <span id="movie-duration" class="duration"></span>
+                    <div class="rating">
+                        <div id="movie-rating" class="rating-stars"></div>
+                    </div>
+                </div>
+                
+                <div class="movie-description">
+                    <h3>Mô tả</h3>
+                    <p id="movie-description"></p>
+                </div>
+
+                <div class="movie-genres">
+                    <h3>Thể loại</h3>
+                    <div id="movie-genres" class="genres"></div>
+                </div>
+            </div>
+
+            <div class="player-controls">
+                <button id="fullscreen" class="control-btn">Toàn màn hình</button>
+                <div class="keyboard-shortcuts">
+                    <small>Phím tắt: F - Toàn màn hình, B - Quay lại, Esc - Thoát toàn màn hình</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="player-footer">
+        <p>&copy; 2025 Xem Phim Online</p>
+    </footer>
+
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/player.js"></script>
+</body>
+
+</html>

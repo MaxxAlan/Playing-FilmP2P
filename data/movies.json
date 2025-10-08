@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "title": "Inception",
+    "year": 2010,
+    "poster": "https://via.placeholder.com/300x450/000000/FFFFFF?text=Inception",
+    "desc": "A mind-bending thriller by Christopher Nolan about dreams within dreams.",
+    "driveId": "1XyzABCdEfGhIJklMNopQRsTuVw",
+    "sub": "",
+    "duration": "148 phút",
+    "genre": ["Sci-Fi", "Thriller", "Action"],
+    "rating": 4.8,
+    "category": "phim-le"
+  },
+  {
+    "id": "2",
+    "title": "Interstellar",
+    "year": 2014,
+    "poster": "https://via.placeholder.com/300x450/000080/FFFFFF?text=Interstellar",
+    "desc": "A journey beyond the stars in search of a new home for humanity.",
+    "driveId": "1DEFghijKLmNOPqrSTuvWxyz123",
+    "sub": "",
+    "duration": "169 phút",
+    "genre": ["Sci-Fi", "Drama", "Adventure"],
+    "rating": 4.6,
+    "category": "phim-le"
+  },
+  {
+    "id": "3",
+    "title": "The Dark Knight",
+    "year": 2008,
+    "poster": "https://via.placeholder.com/300x450/000000/FFFFFF?text=Dark+Knight",
+    "desc": "Batman faces his greatest challenge yet with the Joker.",
+    "driveId": "1GHIjkLMNOpqrSTuvWXYZ456789",
+    "sub": "",
+    "duration": "152 phút",
+    "genre": ["Action", "Crime", "Drama"],
+    "rating": 4.7,
+    "category": "phim-le"
+  },
+  {
+    "id": "4",
+    "title": "Avengers: Endgame",
+    "year": 2019,
+    "poster": "https://via.placeholder.com/300x450/800000/FFFFFF?text=Endgame",
+    "desc": "The epic conclusion to the Infinity Saga.",
+    "driveId": "1JKLmnopQRSTuvWXYZ56789012",
+    "sub": "",
+    "duration": "181 phút",
+    "genre": ["Action", "Adventure", "Drama"],
+    "rating": 4.5,
+    "category": "phim-le"
+  },
+  {
+    "id": "5",
+    "title": "Spider-Man: No Way Home",
+    "year": 2021,
+    "poster": "https://via.placeholder.com/300x450/FF0000/FFFFFF?text=Spider-Man",
+    "desc": "Peter Parker's identity is revealed to the world.",
+    "driveId": "1MNOpqrsTUVwXYZ6789012345",
+    "sub": "",
+    "duration": "148 phút",
+    "genre": ["Action", "Adventure", "Fantasy"],
+    "rating": 4.4,
+    "category": "phim-le"
+  },
+  {
+    "id": "6",
+    "title": "Dune",
+    "year": 2021,
+    "poster": "https://via.placeholder.com/300x450/8B4513/FFFFFF?text=Dune",
+    "desc": "A noble family becomes embroiled in a war for control over a desert planet.",
+    "driveId": "1PQRstuvWXYZ7890123456789",
+    "sub": "",
+    "duration": "155 phút",
+    "genre": ["Sci-Fi", "Adventure", "Drama"],
+    "rating": 4.3,
+    "category": "phim-le"
+  }
+]
