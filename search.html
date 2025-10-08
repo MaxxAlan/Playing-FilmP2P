@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm phim - Xem Phim Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Xem Phim Online</h1>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="categories.html">Thể loại</a>
+            <a href="search.html" class="active">Tìm kiếm</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <h2>Tìm kiếm phim</h2>
+            <p>Khám phá bộ phim yêu thích của bạn</p>
+        </section>
+
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Nhập tên phim, diễn viên, đạo diễn...">
+                    <button id="search-btn" class="search-btn">
+                        <span class="search-icon">🔍</span>
+                        Tìm kiếm
+                    </button>
+                </div>
+                
+                <div class="search-suggestions" id="search-suggestions">
+                    <!-- Gợi ý tìm kiếm sẽ được load từ JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="advanced-filters">
+            <h3>Bộ lọc nâng cao</h3>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="genre-filter">Thể loại:</label>
+                    <select id="genre-filter">
+                        <option value="">Tất cả thể loại</option>
+                        <option value="Action">Hành Động</option>
+                        <option value="Romance">Lãng Mạn</option>
+                        <option value="Comedy">Hài Kịch</option>
+                        <option value="Sci-Fi">Khoa Học Viễn Tưởng</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Horror">Kinh Dị</option>
+                        <option value="Adventure">Phiêu Lưu</option>
+                        <option value="Fantasy">Fantasy</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="year-filter">Năm sản xuất:</label>
+                    <select id="year-filter">
+                        <option value="">Tất cả năm</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="older">Trước 2015</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="rating-filter">Đánh giá:</label>
+                    <select id="rating-filter">
+                        <option value="">Tất cả đánh giá</option>
+                        <option value="4.5">4.5+ sao</option>
+                        <option value="4.0">4.0+ sao</option>
+                        <option value="3.5">3.5+ sao</option>
+                        <option value="3.0">3.0+ sao</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort-filter">Sắp xếp:</label>
+                    <select id="sort-filter">
+                        <option value="relevance">Liên quan nhất</option>
+                        <option value="title">Tên A-Z</option>
+                        <option value="year">Năm mới nhất</option>
+                        <option value="rating">Đánh giá cao nhất</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button id="apply-filters" class="apply-btn">Áp dụng bộ lọc</button>
+                <button id="clear-filters" class="clear-btn">Xóa bộ lọc</button>
+            </div>
+        </section>
+
+        <section class="search-results">
+            <div class="results-header">
+                <h3 id="results-title">Kết quả tìm kiếm</h3>
+                <span id="results-count" class="results-count">0 phim</span>
+            </div>
+            
+            <div class="movies" id="search-results">
+                <!-- Kết quả tìm kiếm sẽ được hiển thị ở đây -->
+            </div>
+
+            <div class="no-results" id="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>Không tìm thấy kết quả</h3>
+                <p>Thử thay đổi từ khóa tìm kiếm hoặc bộ lọc</p>
+                <button id="reset-search" class="reset-btn">Đặt lại tìm kiếm</button>
+            </div>
+        </section>
+
+        <section class="search-tips">
+            <h3>Mẹo tìm kiếm</h3>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <span class="tip-icon">🎯</span>
+                    <h4>Tìm chính xác</h4>
+                    <p>Sử dụng dấu ngoặc kép để tìm cụm từ chính xác: "Avengers Endgame"</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🌟</span>
+                    <h4>Tìm theo sao</h4>
+                    <p>Chọn đánh giá cao để xem những phim hay nhất</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">📅</span>
+                    <h4>Tìm theo năm</h4>
+                    <p>Lọc theo năm để xem phim mới hoặc phim cổ điển</p>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">🎭</span>
+                    <h4>Tìm theo thể loại</h4>
+                    <p>Kết hợp thể loại với từ khóa để thu hẹp kết quả</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Liên kết</h4>
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="categories.html">Thể loại</a></li>
+                    <li><a href="search.html">Tìm kiếm</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Hỗ trợ</h4>
+                <ul>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                    <li><a href="#">Trợ giúp</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Thông tin</h4>
+                <p>&copy; 2025 Xem Phim Online. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/image-manager.js"></script>
+    <script src="assets/js/search.js"></script>
+</body>
+
+</html>

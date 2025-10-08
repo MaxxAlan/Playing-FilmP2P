@@ -1,0 +1,109 @@
+{
+  "imageConfig": {
+    "sizes": {
+      "poster": {
+        "small": { "width": 150, "height": 225 },
+        "medium": { "width": 200, "height": 300 },
+        "large": { "width": 300, "height": 450 },
+        "original": { "width": 600, "height": 900 }
+      },
+      "thumbnail": {
+        "small": { "width": 150, "height": 100 },
+        "medium": { "width": 200, "height": 133 },
+        "large": { "width": 300, "height": 200 },
+        "original": { "width": 600, "height": 400 }
+      },
+      "backdrop": {
+        "small": { "width": 640, "height": 360 },
+        "medium": { "width": 1280, "height": 720 },
+        "large": { "width": 1920, "height": 1080 },
+        "original": { "width": 2560, "height": 1440 }
+      }
+    },
+    "quality": {
+      "low": 60,
+      "medium": 80,
+      "high": 95,
+      "original": 100
+    },
+    "formats": {
+      "webp": true,
+      "jpeg": true,
+      "png": true
+    },
+    "lazyLoading": {
+      "enabled": true,
+      "rootMargin": "50px 0px",
+      "threshold": 0.01
+    },
+    "preloading": {
+      "enabled": true,
+      "criticalImages": 6,
+      "priority": "high"
+    },
+    "caching": {
+      "enabled": true,
+      "maxCacheSize": 50,
+      "cacheTimeout": 3600000
+    },
+    "fallbacks": {
+      "poster": "https://via.placeholder.com/300x450/333333/FFFFFF?text=No+Poster",
+      "thumbnail": "https://via.placeholder.com/300x200/333333/FFFFFF?text=No+Thumb",
+      "backdrop": "https://via.placeholder.com/1920x1080/333333/FFFFFF?text=No+Backdrop"
+    },
+    "responsive": {
+      "breakpoints": {
+        "mobile": 480,
+        "tablet": 768,
+        "desktop": 1024
+      },
+      "imageSizes": {
+        "mobile": "small",
+        "tablet": "medium",
+        "desktop": "large"
+      }
+    },
+    "optimization": {
+      "autoResize": true,
+      "compress": true,
+      "progressive": true,
+      "blurToJpeg": true
+    },
+    "performance": {
+      "preloadCritical": true,
+      "deferNonCritical": true,
+      "useWebP": true,
+      "adaptiveQuality": true
+    }
+  },
+  "imageServices": {
+    "placeholder": {
+      "enabled": true,
+      "baseUrl": "https://via.placeholder.com",
+      "defaultColor": "333333",
+      "textColor": "FFFFFF"
+    },
+    "cloudinary": {
+      "enabled": false,
+      "cloudName": "",
+      "apiKey": "",
+      "transformations": {
+        "quality": "auto",
+        "format": "auto"
+      }
+    },
+    "imagekit": {
+      "enabled": false,
+      "urlEndpoint": "",
+      "publicKey": "",
+      "privateKey": ""
+    }
+  },
+  "monitoring": {
+    "enabled": true,
+    "trackLoadTimes": true,
+    "trackErrors": true,
+    "trackCacheHits": true,
+    "reportInterval": 30000
+  }
+}

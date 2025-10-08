@@ -5,6 +5,9 @@ class MovieApp {
         this.filteredMovies = [];
         this.currentFilter = 'all';
         this.currentSort = 'title';
+        this.currentView = 'grid';
+        this.currentPage = 1;
+        this.moviesPerPage = 12;
         this.watchHistory = this.loadWatchHistory();
         
         this.init();
@@ -14,6 +17,7 @@ class MovieApp {
         try {
             await this.loadMovies();
             this.setupUI();
+            this.handleUrlParameters();
             this.renderMovies();
             this.bindEvents();
             this.renderWatchHistory();
@@ -25,7 +29,7 @@ class MovieApp {
 
     async loadMovies() {
         try {
-            const response = await fetch('./data/movies.json');
+            const response = await fetch('data/movies.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -75,39 +79,96 @@ class MovieApp {
         return categoryNames[category] || category;
     }
 
+    handleUrlParameters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        const genre = urlParams.get('genre');
+        const search = urlParams.get('search');
+
+        if (category) {
+            this.currentFilter = category;
+            this.setActiveFilterByCategory(category);
+        }
+
+        if (genre) {
+            this.currentFilter = 'all';
+            this.filterMoviesByGenre(genre);
+            return; // Don't apply other filters if genre is specified
+        }
+
+        if (search) {
+            const searchInput = document.querySelector('#search-input');
+            if (searchInput) {
+                searchInput.value = search;
+                this.filterMovies(search);
+            }
+        }
+    }
+
+    setActiveFilterByCategory(category) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.filter === category) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    filterMoviesByGenre(genre) {
+        this.filteredMovies = this.movies.filter(movie => 
+            movie.genre.includes(genre)
+        );
+        this.sortMovies();
+    }
+
     renderMovies() {
-        const moviesContainer = document.querySelector('.movies');
+        const moviesContainer = document.querySelector('#movies-container');
         if (!moviesContainer) {
-            console.error('Không tìm thấy container .movies');
+            console.error('Không tìm thấy container #movies-container');
             return;
         }
 
-        moviesContainer.innerHTML = '';
+        // Reset page khi filter mới
+        if (this.currentPage === 1) {
+            moviesContainer.innerHTML = '';
+        }
 
         if (this.filteredMovies.length === 0) {
             moviesContainer.innerHTML = '<p class="no-results">Không tìm thấy phim nào</p>';
+            this.hideLoadMoreButton();
             return;
         }
 
-        this.filteredMovies.forEach(movie => {
+        // Tính toán phim hiển thị cho trang hiện tại
+        const startIndex = (this.currentPage - 1) * this.moviesPerPage;
+        const endIndex = startIndex + this.moviesPerPage;
+        const moviesToShow = this.filteredMovies.slice(startIndex, endIndex);
+
+        moviesToShow.forEach(movie => {
             const movieCard = this.createMovieCard(movie);
             moviesContainer.appendChild(movieCard);
         });
+
+        // Hiển thị/ẩn nút load more
+        this.updateLoadMoreButton();
     }
 
     createMovieCard(movie) {
         const article = document.createElement('article');
-        article.className = 'movie-card';
+        article.className = `movie-card ${this.currentView === 'list' ? 'list-view' : ''}`;
         article.dataset.movieId = movie.id;
 
         // Kiểm tra xem phim đã xem chưa
         const isWatched = this.watchHistory.includes(movie.id);
         const watchedBadge = isWatched ? '<span class="watched-badge">Đã xem</span>' : '';
 
+        // Tạo poster image với ImageManager
+        const posterUrl = ImageUtils.getPosterUrl(movie, this.getOptimalImageSize());
+        
         article.innerHTML = `
             <div class="movie-poster">
-                <img src="${movie.poster}" alt="${movie.title}" 
-                     onerror="this.src='https://via.placeholder.com/300x450/333333/FFFFFF?text=No+Image'">
+                <img data-src="${posterUrl}" alt="${movie.title}" class="lazy-image">
                 ${watchedBadge}
                 <div class="movie-overlay">
                     <button class="watch-btn" data-movie-id="${movie.id}">
@@ -133,7 +194,32 @@ class MovieApp {
             </div>
         `;
 
+        // Setup lazy loading for the image
+        const img = article.querySelector('img');
+        if (window.imageManager) {
+            window.imageManager.observeImage(img);
+        }
+
         return article;
+    }
+
+    /**
+     * Xác định kích thước hình ảnh tối ưu dựa trên view
+     * @returns {string} - Kích thước hình ảnh
+     */
+    getOptimalImageSize() {
+        if (this.currentView === 'list') {
+            return 'medium';
+        }
+        
+        const width = window.innerWidth;
+        if (width <= 480) {
+            return 'small';
+        } else if (width <= 768) {
+            return 'medium';
+        } else {
+            return 'large';
+        }
     }
 
     bindEvents() {
@@ -175,6 +261,22 @@ class MovieApp {
 
         // Lazy load images
         this.setupLazyLoading();
+
+        // View switching
+        const viewButtons = document.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.switchView(e.target.dataset.view);
+            });
+        });
+
+        // Load more button
+        const loadMoreBtn = document.getElementById('load-more');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                this.loadMoreMovies();
+            });
+        }
     }
 
     setActiveFilter(activeBtn) {
@@ -206,6 +308,7 @@ class MovieApp {
     applyFilters() {
         const searchInput = document.querySelector('#search-input');
         const searchTerm = searchInput ? searchInput.value : '';
+        this.currentPage = 1; // Reset page khi filter
         this.filterMovies(searchTerm);
     }
 
@@ -270,14 +373,25 @@ class MovieApp {
         historyContainer.innerHTML = `
             <h3>Đã xem gần đây</h3>
             <div class="history-grid">
-                ${recentMovies.map(movie => `
-                    <div class="history-item" onclick="app.watchMovie('${movie.id}')">
-                        <img src="${movie.poster}" alt="${movie.title}">
-                        <span>${movie.title}</span>
-                    </div>
-                `).join('')}
+                ${recentMovies.map(movie => {
+                    const thumbnailUrl = ImageUtils.getThumbnailUrl(movie, 'small');
+                    return `
+                        <div class="history-item" onclick="app.watchMovie('${movie.id}')">
+                            <img data-src="${thumbnailUrl}" alt="${movie.title}" class="lazy-image">
+                            <span>${movie.title}</span>
+                        </div>
+                    `;
+                }).join('')}
             </div>
         `;
+
+        // Setup lazy loading for history images
+        const historyImages = historyContainer.querySelectorAll('img[data-src]');
+        historyImages.forEach(img => {
+            if (window.imageManager) {
+                window.imageManager.observeImage(img);
+            }
+        });
     }
 
     setupLazyLoading() {
@@ -299,8 +413,58 @@ class MovieApp {
         }
     }
 
-    showError(message) {
+    switchView(view) {
+        this.currentView = view;
+        
+        // Update view buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`[data-view="${view}"]`).classList.add('active');
+        
+        // Update movies container class
         const moviesContainer = document.querySelector('.movies');
+        if (moviesContainer) {
+            moviesContainer.className = view === 'list' ? 'movies list-view' : 'movies';
+        }
+        
+        // Re-render movies với view mới
+        this.currentPage = 1;
+        this.renderMovies();
+    }
+
+    loadMoreMovies() {
+        const totalPages = Math.ceil(this.filteredMovies.length / this.moviesPerPage);
+        if (this.currentPage < totalPages) {
+            this.currentPage++;
+            this.renderMovies();
+        }
+    }
+
+    updateLoadMoreButton() {
+        const loadMoreBtn = document.getElementById('load-more');
+        if (!loadMoreBtn) return;
+        
+        const totalPages = Math.ceil(this.filteredMovies.length / this.moviesPerPage);
+        const hasMore = this.currentPage < totalPages;
+        
+        if (hasMore) {
+            loadMoreBtn.style.display = 'block';
+            loadMoreBtn.textContent = `Xem thêm (${this.filteredMovies.length - (this.currentPage * this.moviesPerPage)} phim còn lại)`;
+        } else {
+            this.hideLoadMoreButton();
+        }
+    }
+
+    hideLoadMoreButton() {
+        const loadMoreBtn = document.getElementById('load-more');
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+
+    showError(message) {
+        const moviesContainer = document.querySelector('#movies-container');
         if (moviesContainer) {
             moviesContainer.innerHTML = `
                 <div class="error-message">
