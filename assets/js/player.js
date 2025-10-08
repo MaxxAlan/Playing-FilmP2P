@@ -41,7 +41,7 @@ class NetflixVideoPlayer {
 
     async loadMovies() {
         try {
-            const response = await fetch('./data/movies.json');
+            const response = await fetch('data/movies.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -318,8 +318,8 @@ class NetflixVideoPlayer {
         const driveUrl = `https://drive.google.com/file/d/${this.currentMovie.driveId}/preview`;
         this.iframe.src = driveUrl;
 
-        // Thêm iframe vào container
-        const videoContainer = document.querySelector('.video-container');
+        // Thêm iframe vào container (đúng selector theo HTML: id="video-container")
+        const videoContainer = document.getElementById('video-container');
         if (videoContainer) {
             videoContainer.innerHTML = '';
             videoContainer.appendChild(this.iframe);
@@ -329,78 +329,7 @@ class NetflixVideoPlayer {
         this.saveToWatchHistory();
     }
 
-    toggleFullscreen() {
-        const videoContainer = document.querySelector('.video-container');
-        
-        if (!this.isFullscreen) {
-            if (videoContainer.requestFullscreen) {
-                videoContainer.requestFullscreen();
-            } else if (videoContainer.webkitRequestFullscreen) {
-                videoContainer.webkitRequestFullscreen();
-            } else if (videoContainer.msRequestFullscreen) {
-                videoContainer.msRequestFullscreen();
-            }
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
-        }
-    }
-
-    updateFullscreenButton() {
-        const fullscreenBtn = document.getElementById('fullscreen');
-        if (fullscreenBtn) {
-            fullscreenBtn.textContent = this.isFullscreen ? 'Thoát toàn màn hình' : 'Toàn màn hình';
-        }
-    }
-
-    handleKeyboard(e) {
-        switch (e.code) {
-            case 'KeyF':
-                e.preventDefault();
-                this.toggleFullscreen();
-                break;
-            case 'Escape':
-                if (this.isFullscreen) {
-                    this.toggleFullscreen();
-                }
-                break;
-            case 'KeyB':
-                // Quay lại trang chủ
-                window.location.href = 'index.html';
-                break;
-        }
-    }
-
-    showControls() {
-        const controlsPanel = document.querySelector('.player-controls');
-        if (controlsPanel) {
-            controlsPanel.style.opacity = '1';
-            this.controlsVisible = true;
-            this.hideControlsAfterDelay();
-        }
-    }
-
-    hideControlsAfterDelay() {
-        clearTimeout(this.hideControlsTimeout);
-        this.hideControlsTimeout = setTimeout(() => {
-            this.hideControls();
-        }, 3000);
-    }
-
-    hideControls() {
-        if (this.isPlaying && this.isFullscreen) {
-            const controlsPanel = document.querySelector('.player-controls');
-            if (controlsPanel) {
-                controlsPanel.style.opacity = '0.7';
-                this.controlsVisible = false;
-            }
-        }
-    }
+    
 
     saveToWatchHistory() {
         if (this.currentMovie) {
@@ -449,22 +378,18 @@ class NetflixVideoPlayer {
     }
 
     showLoading() {
-        const videoContainer = document.querySelector('.video-container');
-        if (videoContainer) {
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'loading-container';
-            loadingDiv.innerHTML = `
-                <div class="loading-spinner"></div>
-                <p>Đang tải video...</p>
-            `;
-            videoContainer.appendChild(loadingDiv);
+        // Dùng overlay có sẵn trong HTML (#loading-overlay)
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
         }
     }
 
     hideLoading() {
-        const loadingDiv = document.querySelector('.loading-container');
-        if (loadingDiv) {
-            loadingDiv.remove();
+        // Ẩn overlay khi iframe đã load
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) {
+            overlay.style.display = 'none';
         }
     }
 
