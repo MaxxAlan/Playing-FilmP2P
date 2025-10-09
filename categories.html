@@ -2,146 +2,91 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thể loại phim - Xem Phim Online</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thể loại</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .toolbar {
+      display: flex;
+      gap: 16px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    select,
+    input {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+
+    select:focus,
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .categories-header {
+      text-align: center;
+      margin: 32px 0;
+    }
+
+    .categories-header h1 {
+      font-size: 2.5em;
+      margin-bottom: 16px;
+    }
+
+    .categories-header p {
+      color: var(--muted);
+      font-size: 1.1em;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Xem Phim Online</h1>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="categories.html" class="active">Thể loại</a>
-            <a href="search.html">Tìm kiếm</a>
-            <a href="about.html">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="page-header">
-            <h2>Thể loại phim</h2>
-            <p>Khám phá phim theo từng thể loại yêu thích</p>
-        </section>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">🎬 Xem Phim</a>
+      <nav class="nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="search.html">Tìm kiếm</a>
+      </nav>
+    </div>
+  </header>
 
-        <section class="categories-grid">
-            <div class="category-card" data-category="phim-le">
-                <div class="category-icon">🎬</div>
-                <h3>Phim Lẻ</h3>
-                <p>Những bộ phim điện ảnh hay nhất</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-category="phim-bo">
-                <div class="category-icon">📺</div>
-                <h3>Phim Bộ</h3>
-                <p>Series phim truyền hình hấp dẫn</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-category="phim-hoat-hinh">
-                <div class="category-icon">🎭</div>
-                <h3>Phim Hoạt Hình</h3>
-                <p>Phim hoạt hình cho mọi lứa tuổi</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-category="phim-tai-lieu">
-                <div class="category-icon">📚</div>
-                <h3>Phim Tài Liệu</h3>
-                <p>Khám phá thế giới qua phim tài liệu</p>
-                <span class="movie-count">0 phim</span>
-            </div>
+  <main class="container">
+    <div class="categories-header">
+      <h1>Thể loại phim</h1>
+      <p>Khám phá bộ sưu tập phim đa dạng của chúng tôi</p>
+    </div>
+    <section class="toolbar">
+      <select id="categorySelect" aria-label="Chọn phân loại">
+        <option value="">Tất cả thể loại</option>
+        <option value="phim-le">Phim lẻ</option>
+        <option value="phim-bo">Phim bộ</option>
+        <option value="phim-hoat-hinh">Hoạt hình</option>
+        <option value="phim-tai-lieu">Tài liệu</option>
+      </select>
+      <input id="genreInput" type="search" placeholder="🔍 Tìm theo thể loại (ví dụ: Sci-Fi)" />
+    </section>
+    <section id="list" class="movie-grid"></section>
+  </main>
 
-            <div class="category-card" data-genre="Action">
-                <div class="category-icon">💥</div>
-                <h3>Hành Động</h3>
-                <p>Phim hành động gay cấn, kịch tính</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-genre="Romance">
-                <div class="category-icon">💕</div>
-                <h3>Lãng Mạn</h3>
-                <p>Những câu chuyện tình yêu đẹp</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-genre="Comedy">
-                <div class="category-icon">😂</div>
-                <h3>Hài Kịch</h3>
-                <p>Phim hài giúp bạn thư giãn</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-genre="Sci-Fi">
-                <div class="category-icon">🚀</div>
-                <h3>Khoa Học Viễn Tưởng</h3>
-                <p>Khám phá tương lai và vũ trụ</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-genre="Drama">
-                <div class="category-icon">🎭</div>
-                <h3>Drama</h3>
-                <p>Những câu chuyện đầy cảm xúc</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-            
-            <div class="category-card" data-genre="Horror">
-                <div class="category-icon">👻</div>
-                <h3>Kinh Dị</h3>
-                <p>Phim kinh dị rùng rợn</p>
-                <span class="movie-count">0 phim</span>
-            </div>
-        </section>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Duyệt theo category và genre.</p>
+    </div>
+  </footer>
 
-        <section class="popular-genres">
-            <h3>Thể loại phổ biến</h3>
-            <div class="genre-tags">
-                <span class="genre-tag" data-genre="Action">Hành Động</span>
-                <span class="genre-tag" data-genre="Romance">Lãng Mạn</span>
-                <span class="genre-tag" data-genre="Comedy">Hài Kịch</span>
-                <span class="genre-tag" data-genre="Sci-Fi">Khoa Học Viễn Tưởng</span>
-                <span class="genre-tag" data-genre="Drama">Drama</span>
-                <span class="genre-tag" data-genre="Horror">Kinh Dị</span>
-                <span class="genre-tag" data-genre="Adventure">Phiêu Lưu</span>
-                <span class="genre-tag" data-genre="Fantasy">Fantasy</span>
-                <span class="genre-tag" data-genre="Thriller">Kịch Tính</span>
-                <span class="genre-tag" data-genre="Crime">Tội Phạm</span>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Liên kết</h4>
-                <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="categories.html">Thể loại</a></li>
-                    <li><a href="search.html">Tìm kiếm</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Hỗ trợ</h4>
-                <ul>
-                    <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
-                    <li><a href="#">Trợ giúp</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Thông tin</h4>
-                <p>&copy; 2025 Xem Phim Online. Tất cả quyền được bảo lưu.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/categories.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/categories.js"></script>
 </body>
 
 </html>

@@ -1,225 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Movie JSON Editor</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 20px
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movie JSON Editor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .github-config {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      width: min(1100px, 92%);
+      margin: 18px auto;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto
-        }
+    .github-config h2 {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
 
-        label {
-            display: block;
-            margin-top: 10px
-        }
+    .github-config .input-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
 
-        input[type=text],
-        textarea,
-        select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 4px
-        }
+    .github-config input {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #0f1217;
+      color: var(--text);
+    }
 
-        .row {
-            display: flex;
-            gap: 12px
-        }
+    .github-status {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
 
-        .col {
-            flex: 1
-        }
+    .wrap {
+      width: min(1100px, 92%);
+      margin: 18px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
 
-        .actions {
-            margin-top: 12px
-        }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+    }
 
-        pre#output {
-            background: #f6f6f6;
-            padding: 12px;
-            max-height: 400px;
-            overflow: auto
-        }
+    .panel h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
 
-        .small {
-            font-size: 0.9em;
-            color: #666
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
 
-        .drive-row {
-            display: flex;
-            gap: 8px
-        }
+    input,
+    textarea,
+    select {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #0f1217;
+      color: var(--text);
+    }
 
-        .drive-row>input {
-            flex: 1
-        }
+    textarea {
+      min-height: 120px;
+    }
 
-        .mt-6 {
-            margin-top: 6px
-        }
+    .list {
+      display: grid;
+      gap: 8px;
+      max-height: 520px;
+      overflow: auto;
+    }
 
-        .import-row {
-            display: flex;
-            gap: 8px;
-            align-items: center
-        }
+    .row {
+      display: grid;
+      grid-template-columns: 56px 1fr 80px;
+      gap: 8px;
+      align-items: center;
+    }
 
-        .img-preview {
-            margin-top: 6px;
-            max-width: 220px;
-            max-height: 140px;
-            border: 1px solid #ddd;
-            padding: 6px;
-            background: #fff
-        }
+    .poster-mini {
+      width: 56px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #0e1116;
+    }
 
-        .img-preview img {
-            max-width: 100%;
-            max-height: 120px;
-            display: block
-        }
-    </style>
+    .button-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .flex-gap {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Movie JSON Editor (nhập liệu -> xuất JSON)</h1>
-
-        <form id="movieForm">
-            <label>Import file `movies.json`
-                <div class="import-row">
-                    <input type="file" id="importFile" accept="application/json">
-                    <select id="importMode">
-                        <option value="merge">Merge (thêm)</option>
-                        <option value="replace">Replace (thay thế)</option>
-                    </select>
-                    <button type="button" id="btnImport">Import</button>
-                </div>
-            </label>
-            <div class="row">
-                <div class="col">
-                    <label>id <span class="small">(string)</span>
-                        <input type="text" id="id" placeholder="1" required>
-                    </label>
-                    <label>title <span class="small">(string)</span>
-                        <input type="text" id="title" placeholder="Interstellar" required>
-                    </label>
-                    <label>year <span class="small">(number)</span>
-                        <input type="text" id="year" placeholder="2014">
-                    </label>
-                    <label>category <span class="small">(string)</span>
-                        <input type="text" id="category" placeholder="phim-le">
-                    </label>
-                    <label>duration <span class="small">(string)</span>
-                        <input type="text" id="duration" placeholder="169 phút">
-                    </label>
-                </div>
-                <div class="col">
-                    <label>rating <span class="small">(number, 0-5)</span>
-                        <input type="text" id="rating" placeholder="4.6">
-                    </label>
-                    <label>desc <span class="small">(string)</span>
-                        <textarea id="desc" rows="5" placeholder="Mô tả phim..."></textarea>
-                    </label>
-                    <label>driveId <span class="small">(string)</span>
-                        <input type="text" id="driveId" placeholder="drive id">
-                    </label>
-                    <label>Google Drive link <span class="small">(paste chia sẻ)</span>
-                        <div class="drive-row">
-                            <input type="text" id="driveLinkInput"
-                                placeholder="https://drive.google.com/file/d/FILEID/view">
-                            <button type="button" id="btnConvertDrive">Chuyển link Drive</button>
-                        </div>
-                    </label>
-                    <div id="driveOutputs" class="small mt-6"></div>
-                    <label>sub <span class="small">(string)</span>
-                        <input type="text" id="sub" placeholder="subtitle url or empty">
-                    </label>
-                </div>
-            </div>
-
-            <label>genre <span class="small">(comma-separated)</span>
-                <input type="text" id="genre" placeholder="Sci-Fi,Drama,Adventure">
-            </label>
-
-            <h3>Poster URLs</h3>
-            <div class="row">
-                <div class="col">
-                    <label>poster.original
-                        <input type="text" id="poster_original" placeholder="https://...">
-                        <div class="img-preview" id="preview_poster_original"></div>
-                    </label>
-                    <label>poster.large
-                        <input type="text" id="poster_large">
-                    </label>
-                </div>
-                <div class="col">
-                    <label>poster.medium
-                        <input type="text" id="poster_medium">
-                    </label>
-                    <label>poster.small
-                        <input type="text" id="poster_small">
-                    </label>
-                </div>
-            </div>
-
-            <h3>Thumbnail URLs</h3>
-            <div class="row">
-                <div class="col">
-                    <label>thumbnail.original
-                        <input type="text" id="thumb_original">
-                        <div class="img-preview" id="preview_thumb_original"></div>
-                    </label>
-                    <label>thumbnail.large
-                        <input type="text" id="thumb_large">
-                    </label>
-                </div>
-                <div class="col">
-                    <label>thumbnail.medium
-                        <input type="text" id="thumb_medium">
-                    </label>
-                    <label>thumbnail.small
-                        <input type="text" id="thumb_small">
-                    </label>
-                </div>
-            </div>
-
-            <h3>Images</h3>
-            <label>images.backdrop
-                <input type="text" id="backdrop">
-                <div class="img-preview" id="preview_backdrop"></div>
-            </label>
-            <label>images.gallery <span class="small">(comma-separated URLs)</span>
-                <input type="text" id="gallery" placeholder="url1,url2">
-            </label>
-
-            <p class="small">Ghi chú: Điền ít nhất <strong>id</strong> và <strong>title</strong>. Sử dụng dấu phẩy để
-                phân tách nhiều genre hoặc gallery URLs.</p>
-
-            <div class="actions">
-                <button type="button" id="btnGenerate">Tạo object</button>
-                <button type="button" id="btnAdd">Thêm vào list</button>
-                <button type="button" id="btnDownload">Tải JSON</button>
-                <button type="button" id="btnCopy">Sao chép JSON</button>
-                <button type="button" id="btnReset">Reset Form</button>
-            </div>
-        </form>
-
-        <h2>Preview</h2>
-        <pre id="output">[]</pre>
+  <section class="github-config">
+    <h2>GitHub Configuration</h2>
+    <div class="input-group">
+      <input id="githubToken" type="password" placeholder="GitHub Token" />
+      <input id="githubRepo" placeholder="Username/Repository" />
+      <input id="githubBranch" placeholder="Branch (mặc định: main)" value="main" />
     </div>
-
-    <script src="assets/js/movie-editor.js"></script>
+    <button class="btn primary" id="commitToGithub">Commit to GitHub</button>
+    <div id="githubStatus" class="github-status"></div>
+  </section>
+  <main class="wrap">
+    <section class="panel">
+      <h2>Nhập thông tin phim</h2>
+      <div class="grid">
+        <input id="title" placeholder="Tên phim" />
+        <input id="year" type="number" placeholder="Năm phát hành" />
+        <input id="poster" placeholder="URL poster" />
+        <input id="driveId" placeholder="driveId" />
+        <div class="button-row">
+        </div>
+        <input id="genre" placeholder="genre (Action, Comedy, ...)" />
+        <div class="flex-gap">
+          <button class="btn primary" id="add">Thêm vào list</button>
+          <button class="btn" id="download">Tải JSON</button>
+        </div>
+    </section>
+    <section class="panel">
+      <h2>Danh sách</h2>
+      <div id="list" class="list"></div>
+    </section>
+  </main>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/movie-editor.js"></script>
 </body>
 
 </html>

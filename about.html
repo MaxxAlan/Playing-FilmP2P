@@ -2,205 +2,98 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu - Xem Phim Online</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giới thiệu</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-section {
+      max-width: 800px;
+      margin: 48px auto;
+      text-align: center;
+    }
+
+    .about-section h1 {
+      font-size: 2.5em;
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+
+    .about-content {
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .feature-item {
+      padding: 24px;
+      background: var(--surface);
+      border-radius: 16px;
+      text-align: left;
+    }
+
+    .feature-item h3 {
+      font-size: 1.2em;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .feature-item p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Xem Phim Online</h1>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="categories.html">Thể loại</a>
-            <a href="search.html">Tìm kiếm</a>
-            <a href="about.html" class="active">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="page-header">
-            <h2>Giới thiệu về chúng tôi</h2>
-            <p>Khám phá thế giới điện ảnh qua nền tảng xem phim trực tuyến hàng đầu</p>
-        </section>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">🎬 Xem Phim</a>
+      <nav class="nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="categories.html">Thể loại</a>
+        <a href="search.html">Tìm kiếm</a>
+      </nav>
+    </div>
+  </header>
 
-        <section class="about-content">
-            <div class="about-intro">
-                <div class="intro-text">
-                    <h3>Chào mừng đến với Xem Phim Online</h3>
-                    <p>Chúng tôi là nền tảng xem phim trực tuyến hàng đầu tại Việt Nam, cung cấp trải nghiệm xem phim chất lượng cao với hàng nghìn bộ phim từ nhiều thể loại khác nhau.</p>
-                    <p>Với giao diện thân thiện, tải nhanh và chất lượng video HD, chúng tôi cam kết mang đến cho bạn những giây phút giải trí tuyệt vời nhất.</p>
-                </div>
-                <div class="intro-image">
-                    <div class="image-placeholder">
-                        🎬
-                    </div>
-                </div>
-            </div>
+  <main class="container">
+    <section class="about-section">
+      <h1>Về dự án của chúng tôi</h1>
+      <p class="about-content">Website xem phim tĩnh, phát video từ Google Drive công khai. Thiết kế hiện đại,
+        responsive và tối ưu hóa trải nghiệm người dùng.</p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h4>Tải nhanh</h4>
-                    <p>Xem phim mượt mà với tốc độ tải nhanh, không giật lag</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h4>Chất lượng cao</h4>
-                    <p>Phim HD, Full HD với âm thanh sống động</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h4>Đa thiết bị</h4>
-                    <p>Xem trên mọi thiết bị: máy tính, điện thoại, tablet</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔄</div>
-                    <h4>Đồng bộ</h4>
-                    <p>Lịch sử xem được đồng bộ trên tất cả thiết bị</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h4>Tìm kiếm thông minh</h4>
-                    <p>Tìm phim nhanh chóng với công cụ tìm kiếm mạnh mẽ</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h4>Miễn phí</h4>
-                    <p>Xem phim hoàn toàn miễn phí, không cần đăng ký</p>
-                </div>
-            </div>
-
-            <div class="stats-section">
-                <h3>Thống kê của chúng tôi</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Phim</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Thể loại</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">1M+</div>
-                        <div class="stat-label">Lượt xem</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Hỗ trợ</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mission-section">
-                <h3>Sứ mệnh của chúng tôi</h3>
-                <div class="mission-content">
-                    <div class="mission-text">
-                        <p>Chúng tôi tin rằng giải trí là một phần quan trọng của cuộc sống. Với sứ mệnh mang đến những bộ phim hay nhất, chúng tôi không ngừng cải tiến và nâng cao chất lượng dịch vụ.</p>
-                        <p>Mục tiêu của chúng tôi là trở thành nền tảng xem phim trực tuyến số 1 tại Việt Nam, nơi mọi người có thể tìm thấy và thưởng thức những bộ phim yêu thích một cách dễ dàng và thuận tiện nhất.</p>
-                    </div>
-                    <div class="mission-image">
-                        <div class="image-placeholder">
-                            🎭
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-section">
-                <h3>Đội ngũ của chúng tôi</h3>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-avatar">👨‍💻</div>
-                        <h4>Hoang Manh</h4>
-                        <p>Trưởng nhóm kỹ thuật</p>
-                        <span class="member-role">Phụ trách phát triển hệ thống</span>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-avatar">👩‍🎨</div>
-                        <h4>Hoang Manh</h4>
-                        <p>Trưởng phòng thiết kế</p>
-                        <span class="member-role">Phụ trách giao diện người dùng</span>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-avatar">👨‍💼</div>
-                        <h4>Hoang Manh</h4>
-                        <p>Giám đốc sản phẩm</p>
-                        <span class="member-role">Phụ trách chiến lược sản phẩm</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="values-section">
-                <h3>Giá trị cốt lõi</h3>
-                <div class="values-list">
-                    <div class="value-item">
-                        <div class="value-icon">💎</div>
-                        <div class="value-content">
-                            <h4>Chất lượng</h4>
-                            <p>Cam kết mang đến chất lượng tốt nhất cho người dùng</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">🤝</div>
-                        <div class="value-content">
-                            <h4>Tin cậy</h4>
-                            <p>Xây dựng lòng tin thông qua dịch vụ ổn định và bảo mật</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">🚀</div>
-                        <div class="value-content">
-                            <h4>Đổi mới</h4>
-                            <p>Không ngừng cải tiến và phát triển công nghệ</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon">❤️</div>
-                        <div class="value-content">
-                            <h4>Người dùng</h4>
-                            <p>Đặt trải nghiệm người dùng làm trung tâm</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Liên kết</h4>
-                <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="categories.html">Thể loại</a></li>
-                    <li><a href="search.html">Tìm kiếm</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Hỗ trợ</h4>
-                <ul>
-                    <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
-                    <li><a href="#">Trợ giúp</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Thông tin</h4>
-                <p>&copy; 2025 Xem Phim Online. Tất cả quyền được bảo lưu.</p>
-            </div>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h3>📱 Responsive Design</h3>
+          <p>Trải nghiệm xem phim mượt mà trên mọi thiết bị, từ điện thoại đến máy tính.</p>
         </div>
-    </footer>
-    
-    <script src="assets/js/utils.js"></script>
+        <div class="feature-item">
+          <h3>⚡ Tốc độ nhanh</h3>
+          <p>Tối ưu hóa hiệu suất, tải trang nhanh chóng để bạn không phải chờ đợi.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🚀 Dễ triển khai</h3>
+          <p>Được thiết kế để dễ dàng triển khai trên GitHub Pages, không cần cấu hình phức tạp.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>MIT License • 2025</p>
+    </div>
+  </footer>
 </body>
 
 </html>
