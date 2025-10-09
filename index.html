@@ -24,13 +24,23 @@
         <section class="search-section">
             <input type="text" id="search-input" placeholder="Tìm kiếm phim...">
         </section>
-        
+
         <section class="controls-section">
             <div class="filter-buttons">
                 <!-- Filter buttons sẽ được tạo bởi JavaScript -->
+                <!-- Fallback static filters for no-JS or early DOM load -->
+                <button class="filter-btn active" data-filter="all">Tất cả</button>
+                <button class="filter-btn" data-filter="phim-le">Phim Lẻ</button>
+                <button class="filter-btn" data-filter="phim-bo">Phim Bộ</button>
             </div>
             <div class="sort-container">
                 <!-- Sort dropdown sẽ được tạo bởi JavaScript -->
+                <label for="sort-select" class="sr-only">Sắp xếp</label>
+                <select id="sort-select" aria-label="Sắp xếp danh sách phim">
+                    <option value="title">Sắp xếp theo tên</option>
+                    <option value="year">Sắp xếp theo năm</option>
+                    <option value="rating">Sắp xếp theo đánh giá</option>
+                </select>
             </div>
         </section>
 
@@ -57,7 +67,7 @@
     <footer>
         &copy; 2025 Xem Phim Online
     </footer>
-    
+
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/image-manager.js"></script>
     <script src="assets/js/main.js"></script>

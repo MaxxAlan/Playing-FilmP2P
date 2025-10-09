@@ -395,19 +395,29 @@ class MovieApp {
     }
 
     setupLazyLoading() {
+        // Prefer centralized ImageManager if available to avoid duplicate observers
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        if (window.imageManager && typeof window.imageManager.observeImage === 'function') {
+            lazyImages.forEach(img => {
+                window.imageManager.observeImage(img);
+            });
+            return;
+        }
+
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src;
-                        img.classList.remove('lazy');
+                        // remove the project's lazy-image class when loaded
+                        img.classList.remove('lazy-image');
                         observer.unobserve(img);
                     }
                 });
             });
 
-            document.querySelectorAll('img[data-src]').forEach(img => {
+            lazyImages.forEach(img => {
                 imageObserver.observe(img);
             });
         }
