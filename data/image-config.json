@@ -47,9 +47,9 @@
       "cacheTimeout": 3600000
     },
     "fallbacks": {
-      "poster": "https://via.placeholder.com/300x450/333333/FFFFFF?text=No+Poster",
-      "thumbnail": "https://via.placeholder.com/300x200/333333/FFFFFF?text=No+Thumb",
-      "backdrop": "https://via.placeholder.com/1920x1080/333333/FFFFFF?text=No+Backdrop"
+      "poster": "https://drive.google.com/file/d/18_V5kwQ-bTKeDDmGnK04c3RsX-I-m1V1/view?usp=sharing?text=No+Poster",
+      "thumbnail": "https://drive.google.com/file/d/18_V5kwQ-bTKeDDmGnK04c3RsX-I-m1V1/view?usp=sharing?text=No+Thumb",
+      "backdrop": "https://drive.google.com/file/d/18_V5kwQ-bTKeDDmGnK04c3RsX-I-m1V1/view?usp=sharing?text=No+Backdrop"
     },
     "responsive": {
       "breakpoints": {

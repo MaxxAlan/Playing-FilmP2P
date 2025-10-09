@@ -5,18 +5,21 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## 🚀 Tính năng chính
 
 ### 🎯 Tính năng cốt lõi
+
 - ✅ **Static Frontend**: Host trên GitHub Pages (HTML + CSS + JS tĩnh)
 - ✅ **Google Drive Integration**: Video và hình ảnh lưu trên Google Drive
 - ✅ **Responsive Design**: Hoạt động tốt trên mobile và desktop
 - ✅ **Multi-page Structure**: Trang chủ, thể loại, tìm kiếm, giới thiệu, liên hệ
 
 ### 🔍 Tìm kiếm & Lọc nâng cao
+
 - ✅ **Tìm kiếm thông minh**: Tìm phim theo tên, mô tả, thể loại
 - ✅ **Bộ lọc nâng cao**: Theo thể loại, năm, đánh giá
 - ✅ **Gợi ý tìm kiếm**: Auto-suggestions khi gõ
 - ✅ **Sắp xếp**: Theo tên, năm, đánh giá, thời lượng
 
 ### 🎨 Giao diện & Trải nghiệm
+
 - ✅ **View Switching**: Chuyển đổi giữa Grid và List view
 - ✅ **Load More**: Pagination với nút "Xem thêm"
 - ✅ **Lịch sử xem**: Lưu tiến độ xem bằng localStorage
@@ -24,12 +27,14 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - ✅ **Loading States**: Animation loading mượt mà
 
 ### 🎬 Video Player
+
 - ✅ **Google Drive Player**: Iframe player tích hợp
 - ✅ **Fullscreen Support**: Toàn màn hình với phím tắt
 - ✅ **Keyboard Shortcuts**: F (fullscreen), B (back), Esc (exit)
 - ✅ **Auto-resume**: Tự động lưu tiến độ xem
 
 ### 📱 Responsive & Mobile
+
 - ✅ **Mobile Optimized**: Tối ưu cho điện thoại
 - ✅ **Touch Friendly**: Buttons và controls dễ chạm
 - ✅ **Adaptive Layout**: Layout tự động điều chỉnh
@@ -66,6 +71,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## 🎯 Cách hoạt động
 
 ### 1. Multi-page Architecture
+
 - **Trang chủ** (`index.html`): Hiển thị danh sách phim với grid/list view, tìm kiếm cơ bản
 - **Thể loại** (`categories.html`): Duyệt phim theo category và genre
 - **Tìm kiếm** (`search.html`): Tìm kiếm nâng cao với nhiều bộ lọc
@@ -74,18 +80,21 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - **404** (`404.html`): Trang lỗi thân thiện với gợi ý phim
 
 ### 2. Frontend (GitHub Pages)
+
 - Host toàn bộ code tĩnh trên GitHub Pages
 - Load danh sách phim từ `data/movies.json`
 - Render giao diện responsive với CSS Grid/Flexbox
 - JavaScript modules cho từng trang riêng biệt
 
 ### 3. Media Storage (Google Drive)
+
 - Upload video và poster lên Google Drive
 - Lấy `driveId` từ link chia sẻ công khai
 - Sử dụng iframe preview để phát video
 - CDN của Google Drive cho tốc độ tải nhanh
 
 ### 4. Metadata & Data Management
+
 - File `movies.json` chứa thông tin chi tiết phim
 - Bao gồm `driveId`, poster URL, mô tả, thể loại, đánh giá
 - localStorage để lưu lịch sử xem và preferences
@@ -96,11 +105,13 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ### Bước 1: Chuẩn bị Google Drive
 
 1. **Upload video lên Google Drive**:
+
    - Tạo thư mục riêng cho videos
    - Upload file video (MP4, AVI, MKV...)
    - Đặt quyền "Anyone with the link can view"
 
 2. **Lấy Drive ID**:
+
    ```
    Link chia sẻ: https://drive.google.com/file/d/1XyzABCdEfGhIJklMNopQRsTuVw/view
    Drive ID: 1XyzABCdEfGhIJklMNopQRsTuVw
@@ -144,6 +155,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ```
 
 **Lưu ý về cấu trúc JSON:**
+
 - `id`: ID duy nhất cho phim
 - `title`: Tên phim
 - `year`: Năm sản xuất
@@ -159,6 +171,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ### Bước 3: Deploy lên GitHub Pages
 
 1. **Tạo repository mới**:
+
    ```bash
    git init
    git add .
@@ -169,6 +182,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
    ```
 
 2. **Kích hoạt GitHub Pages**:
+
    - Vào Settings → Pages
    - Chọn Source: Deploy from a branch
    - Chọn Branch: main / (root)
@@ -182,6 +196,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## 🎮 Cách sử dụng
 
 ### 👤 Cho người dùng cuối
+
 1. **Xem phim**: Click vào poster phim → Chọn "Xem ngay"
 2. **Tìm kiếm**: Dùng thanh tìm kiếm hoặc trang Search nâng cao
 3. **Duyệt thể loại**: Vào trang Categories để xem theo thể loại
@@ -191,6 +206,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ### 🛠️ Cho quản trị viên
 
 #### Thêm phim mới
+
 1. Upload video lên Google Drive
 2. Lấy Drive ID từ link chia sẻ
 3. Tìm poster/thumbnail cho phim
@@ -198,11 +214,13 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 5. Commit và push lên GitHub
 
 #### Cập nhật thông tin phim
+
 1. Chỉnh sửa `data/movies.json`
 2. Commit và push lên GitHub
 3. Website sẽ tự động cập nhật
 
 #### Quản lý nội dung
+
 - **Categories**: Thêm/xóa categories trong categories.js
 - **Genres**: Cập nhật danh sách genre trong search.html
 - **Contact Info**: Cập nhật thông tin liên hệ trong contact.html
@@ -211,6 +229,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## 🔧 Tùy chỉnh
 
 ### 🎨 Thay đổi giao diện
+
 - **Màu sắc**: Chỉnh sửa CSS variables trong `style.css`
 - **Layout**: Thay đổi grid columns, spacing
 - **Typography**: Cập nhật fonts, sizes
@@ -218,6 +237,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - **Mobile**: Tùy chỉnh responsive breakpoints
 
 ### 🚀 Thêm tính năng mới
+
 - **Phân trang**: Thêm pagination cho danh sách phim
 - **Playlist**: Tạo danh sách phát tự động
 - **Đánh giá**: Cho phép user đánh giá phim
@@ -227,12 +247,14 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - **Recommendations**: Gợi ý phim tương tự
 
 ### 📱 Responsive Design
+
 - **Breakpoints**: 768px (tablet), 480px (mobile)
 - **Touch gestures**: Swipe, pinch-to-zoom
 - **Mobile menu**: Hamburger menu cho mobile
 - **Touch targets**: Buttons đủ lớn cho mobile
 
 ### 🔍 SEO Optimization
+
 - **Meta tags**: Động cho từng phim
 - **Sitemap**: Tạo sitemap.xml
 - **Structured data**: JSON-LD cho movies
@@ -242,16 +264,19 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## ⚠️ Lưu ý quan trọng
 
 ### Giới hạn Google Drive
+
 - **Băng thông**: 100-200GB/ngày/file
 - **Concurrent viewers**: ~100 người xem đồng thời
 - **File size**: Tối đa 5TB/file (Google Drive limit)
 
 ### Bảo mật
+
 - Không có authentication system
 - Ai có link đều xem được
 - Không lưu user data (chỉ localStorage)
 
 ### Performance
+
 - Static files load nhanh
 - Google Drive CDN tốt
 - Có thể cache JSON với service worker
@@ -259,12 +284,14 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ## 🚀 Tính năng nâng cao (Roadmap)
 
 ### 📱 PWA & Performance
+
 - [ ] **Service Worker**: Cache offline cho phim đã xem
 - [ ] **PWA**: Progressive Web App với install prompt
 - [ ] **Lazy Loading**: Load images khi cần thiết
 - [ ] **Image Optimization**: WebP format, responsive images
 
 ### 🔍 Search & Discovery
+
 - [ ] **Search API**: Algolia hoặc Elasticsearch integration
 - [ ] **Smart Recommendations**: AI-based movie suggestions
 - [ ] **Trending Movies**: Phim đang hot
@@ -272,6 +299,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - [ ] **Similar Movies**: Phim tương tự
 
 ### 👥 Social Features
+
 - [ ] **User Accounts**: Đăng ký/đăng nhập
 - [ ] **Comments**: Disqus integration
 - [ ] **Ratings**: User rating system
@@ -280,6 +308,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - [ ] **User Profiles**: Trang cá nhân
 
 ### 🎬 Video Features
+
 - [ ] **Subtitle support**: VTT files với multiple languages
 - [ ] **Multiple quality**: 720p, 1080p, 4K options
 - [ ] **Auto-play next**: Play next episode automatically
@@ -287,6 +316,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - [ ] **Picture-in-Picture**: PiP mode support
 
 ### 📊 Analytics & Admin
+
 - [ ] **Google Analytics**: Track user behavior
 - [ ] **Admin Panel**: Dashboard quản lý phim
 - [ ] **Content Management**: Easy add/edit movies
@@ -294,6 +324,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - [ ] **Reports**: Viewing statistics, popular movies
 
 ### 🔧 Technical Enhancements
+
 - [ ] **API Backend**: Node.js/Express backend
 - [ ] **Database**: MongoDB/PostgreSQL cho metadata
 - [ ] **CDN**: CloudFlare cho static assets
@@ -305,24 +336,28 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 ### 🐛 Troubleshooting
 
 #### Video không phát được
+
 1. Kiểm tra Google Drive link có public không
 2. Xem console browser (F12) có lỗi gì
 3. Thử refresh trang
 4. Kiểm tra internet connection
 
 #### Website không load
+
 1. Kiểm tra GitHub Pages có hoạt động không
 2. Xem repository có public không
 3. Kiểm tra file paths trong code
 4. Clear browser cache
 
 #### Mobile không responsive
+
 1. Kiểm tra viewport meta tag
 2. Test trên different screen sizes
 3. Xem CSS media queries
 4. Kiểm tra touch events
 
 ### 📧 Liên hệ
+
 - **Email**: aizasybxitjpvbi@zohomail.com
 - **Email Backup**: manhhoangvipbao@gmail.com
 - **Facebook**: https://www.facebook.com/abcxyz
@@ -330,6 +365,7 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - **TikTok**: https://www.tiktok.com/@abcxyz
 
 ### 🔧 Technical Support
+
 - **GitHub Issues**: Báo bug hoặc feature request
 - **Documentation**: Đọc kỹ README này
 - **Community**: Tham gia discussion trong Issues
@@ -350,4 +386,12 @@ MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân v
 
 **🎬 Chúc bạn có trải nghiệm xem phim tuyệt vời!**
 
-*Website được phát triển bởi Hoang Manh - 2025*
+_Website được phát triển bởi Hoang Manh - 2025_
+
+## Movie JSON Editor (tool bổ trợ)
+
+Đã thêm `movie-editor.html` và `assets/js/movie-editor.js` — một trang nhập liệu đơn giản để tạo/biên tập các entry trong `data/movies.json`.
+
+- Mở `movie-editor.html` bằng trình duyệt.
+- Điền `id`, `title` và các trường khác. `genre` và `images.gallery` dùng dấu phẩy để phân tách.
+- Dùng "Thêm vào list" để quản lý danh sách, "Tải JSON" để lưu file.
