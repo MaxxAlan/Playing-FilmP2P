@@ -156,6 +156,8 @@ Website xem phim online được xây dựng với **static frontend + Google Dr
 - `rating`: Điểm đánh giá (0-5)
 - `category`: Phân loại (phim-le, phim-bo, phim-hoat-hinh, phim-tai-lieu)
 
+Tool giúp ae cập nhập phim dễ dàng hơn, truy cập: https://crytals-sc.github.io/json-link/
+
 ### Bước 3: Deploy lên GitHub Pages
 
 1. **Tạo repository mới**:
