@@ -115,6 +115,7 @@
     <!-- Fix relative fetch path expected by player.js (rewrites ../data/* to data/* from this page) -->
     <script>(function(){var of=window.fetch;window.fetch=function(i,n){if(typeof i==='string'&&i.indexOf('../data/')===0){i=i.replace('../data/','data/');}return of(i,n);};})();</script>
     <script src="assets/js/utils.js"></script>
+    <script src="assets/js/image-manager.js"></script>
     <script src="assets/js/player.js"></script>
 </body>
 

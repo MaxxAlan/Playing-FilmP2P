@@ -34,15 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            const iframe = document.createElement('iframe');
-            iframe.src = `https://drive.google.com/file/d/${movie.driveId}/preview`;
-            iframe.width = '100%';
-            iframe.height = '100%';
-            iframe.frameBorder = '0';
-            iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
-            iframe.allowFullscreen = true;
-            playerContainer.appendChild(iframe);
-
             updateMovieInfo(movie);
             addToWatchHistory(movieId);
             wireActions(movie);
@@ -149,6 +140,7 @@ function wireActions(movie) {
     const playBtn = document.getElementById('play-btn');
     if (playBtn) {
         playBtn.addEventListener('click', () => {
+            createPlayer(movie);
             const container = document.getElementById('player-container');
             if (container) container.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
@@ -196,6 +188,33 @@ function wireActions(movie) {
             }
         });
     }
+}
+
+function createPlayer(movie) {
+    const playerContainer = document.getElementById('player-container');
+    if (!playerContainer) return;
+
+    // Avoid duplicating the iframe
+    if (playerContainer.querySelector('iframe')) return;
+
+    if (!movie || !movie.driveId) {
+        showError('Thiếu mã video.');
+        return;
+    }
+
+    showLoading(true);
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://drive.google.com/file/d/${movie.driveId}/preview`;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.frameBorder = '0';
+    iframe.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture';
+    iframe.allowFullscreen = true;
+
+    iframe.onload = function() { showLoading(false); };
+    iframe.onerror = function() { showError('Không thể tải video.'); };
+
+    playerContainer.appendChild(iframe);
 }
 
 // Export if using modules (but since static, likely concatenated or separate scripts)
