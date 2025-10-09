@@ -504,6 +504,7 @@ main {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background: rgba(255,255,255,0.1);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
@@ -2055,10 +2056,6 @@ footer {
     to { transform: rotate(360deg); }
 }
 
-/* Smooth transitions */
-* {
-    transition: all 0.3s ease;
-}
 
 /* Focus states for accessibility */
 button:focus,
@@ -2066,6 +2063,19 @@ input:focus,
 a:focus {
     outline: 2px solid #667eea;
     outline-offset: 2px;
+}
+
+/* Utility: visually hidden (screen-reader only) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 /* Categories page styles */
@@ -3206,6 +3216,7 @@ a:focus {
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

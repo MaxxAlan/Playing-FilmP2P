@@ -1,0 +1,11 @@
+{
+  "name": "playing_film_ui_tests",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "ui-test": "node tools/ui_test.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
