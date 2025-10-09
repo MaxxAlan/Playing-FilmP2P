@@ -24,7 +24,7 @@
     <!-- Main Video Player -->
     <main class="netflix-main">
         <div class="video-player-container">
-            <div class="video-wrapper" id="video-container">
+            <div class="video-wrapper" id="player-container">
                 <!-- Video iframe sẽ được thêm bởi JavaScript -->
             </div>
 
@@ -56,12 +56,15 @@
         <!-- Movie Details Panel -->
         <div class="movie-details-panel">
             <div class="movie-info">
+                <div class="movie-poster-container">
+                    <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster">
+                </div>
                 <div class="movie-header">
                     <h1 id="movie-title-detail">Đang tải...</h1>
                     <div class="movie-meta">
-                        <span id="movie-year" class="meta-item">2024</span>
-                        <span id="movie-duration" class="meta-item">120 phút</span>
-                        <span id="movie-rating" class="meta-item rating">⭐ 8.5</span>
+                        <span id="movie-year" class="meta-item">9999</span>
+                        <span id="movie-duration" class="meta-item">9999 phút</span>
+                        <span id="movie-rating" class="meta-item rating">⭐ 99999</span>
                     </div>
                 </div>
 
@@ -97,6 +100,11 @@
                         Chia sẻ
                     </button>
                 </div>
+
+                <div class="movie-gallery">
+                    <h2>Gallery</h2>
+                    <div id="movie-gallery-images" class="gallery-images"></div>
+                </div>
             </div>
         </div>
     </main>
@@ -105,8 +113,7 @@
     <div class="toast-container" id="toast-container"></div>
 
     <script src="assets/js/utils.js"></script>
-    <!-- Disabled complex player to avoid custom controls interfering -->
-    <script src="assets/js/simple-player.js"></script>
+    <script src="assets/js/player.js"></script>
 </body>
 
 </html>

@@ -505,6 +505,8 @@ main {
     border-radius: 8px;
     background: rgba(255,255,255,0.1);
     -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
@@ -535,6 +537,9 @@ main {
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -692,6 +697,9 @@ main {
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
@@ -909,6 +917,9 @@ main {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -945,6 +956,9 @@ main {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
 }
@@ -987,6 +1001,9 @@ main {
 .action-btn.secondary {
     background: rgba(255,255,255,0.1);
     color: white;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.2);
 }
@@ -1012,6 +1029,9 @@ main {
     color: white;
     padding: 1rem 1.5rem;
     border-radius: 8px;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-left: 4px solid #e50914;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -1125,6 +1145,9 @@ main {
     background: rgba(255,255,255,0.1);
     border-radius: 15px;
     padding: 2rem;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -1671,6 +1694,7 @@ footer {
 /* High DPI displays (iPhone retina) */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .video-wrapper iframe {
+        image-rendering: -webkit-optimize-contrast;
         image-rendering: -webkit-optimize-contrast;
         image-rendering: crisp-edges;
     }
@@ -3071,6 +3095,9 @@ a:focus {
     text-align: center;
     max-width: 800px;
     background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 3rem;
@@ -3207,6 +3234,9 @@ a:focus {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 2rem;
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 

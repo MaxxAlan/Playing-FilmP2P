@@ -175,6 +175,10 @@ class MovieApp {
                         <span class="play-icon">▶</span>
                         Xem ngay
                     </button>
+                    <button class="share-btn" data-movie-id="${movie.id}">
+                        <span class="share-icon">↗</span>
+                        Chia sẻ
+                    </button>
                 </div>
             </div>
             <div class="movie-info">
@@ -223,12 +227,16 @@ class MovieApp {
     }
 
     bindEvents() {
-        // Xử lý sự kiện click nút "Xem ngay"
+        // Xử lý sự kiện click nút "Xem ngay" và "Chia sẻ"
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('watch-btn') || e.target.closest('.watch-btn')) {
                 const btn = e.target.closest('.watch-btn');
                 const movieId = btn.dataset.movieId;
                 this.watchMovie(movieId);
+            } else if (e.target.classList.contains('share-btn') || e.target.closest('.share-btn')) {
+                const btn = e.target.closest('.share-btn');
+                const movieId = btn.dataset.movieId;
+                this.shareMovie(movieId);
             }
         });
 
@@ -339,6 +347,36 @@ class MovieApp {
             
             // Chuyển đến trang xem phim với ID
             window.location.href = `movie.html?id=${movieId}`;
+        }
+    }
+
+    shareMovie(movieId) {
+        const movie = this.movies.find(m => m.id === movieId);
+        if (!movie) return;
+
+        const url = `${window.location.origin}/movie.html?id=${movieId}`;
+        const title = movie.title;
+        const text = `Xem phim ${title} trên Xem Phim Online`;
+
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                text: text,
+                url: url
+            }).then(() => {
+                Utils.showToast('Chia sẻ thành công!');
+            }).catch(err => {
+                console.error('Lỗi khi chia sẻ:', err);
+                Utils.showToast('Không thể chia sẻ. Hãy thử sao chép link.');
+            });
+        } else {
+            // Fallback: Sao chép vào clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                Utils.showToast('Link đã được sao chép vào clipboard!');
+            }).catch(err => {
+                console.error('Lỗi khi sao chép:', err);
+                Utils.showToast('Không thể sao chép link.');
+            });
         }
     }
 
