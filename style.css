@@ -1464,6 +1464,42 @@ footer {
     }
 }
 
+/* Hide custom JS-driven controls (user requested disable) */
+.video-controls,
+.video-controls-overlay,
+.control-btn,
+#play-pause-btn,
+#big-play-btn,
+#fullscreen-btn,
+#volume-control-btn,
+#volume-slider,
+#progress-bar,
+#progress-filled,
+#progress-handle,
+#rewind-btn,
+#forward-btn,
+#subtitle-btn,
+#quality-btn {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Improve perceived video sharpness: enable GPU rasterization and slight contrast */
+.video-wrapper video,
+.video-wrapper iframe,
+.video-wrapper video::-webkit-media-controls {
+    -webkit-font-smoothing: antialiased;
+    image-rendering: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Slight upscale sharpening filter (subtle) */
+.video-wrapper video {
+    filter: contrast(1.05) saturate(1.03);
+}
+
 @media (max-width: 480px) {
     /* iPhone and small devices */
     .netflix-main {
