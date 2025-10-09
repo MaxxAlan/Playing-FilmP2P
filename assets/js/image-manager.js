@@ -5,9 +5,9 @@ class ImageManager {
         this.loadingImages = new Set();
         this.failedImages = new Set();
         this.defaultFallbacks = {
-            poster: 'https://via.placeholder.com/300x450/333333/FFFFFF?text=No+Poster',
-            thumbnail: 'https://via.placeholder.com/300x200/333333/FFFFFF?text=No+Thumb',
-            backdrop: 'https://via.placeholder.com/1920x1080/333333/FFFFFF?text=No+Backdrop'
+            poster: 'https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/img/lib/imgFallback.jpg?text=No+Poster',
+            thumbnail: 'https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/img/lib/imgFallback.jpg?text=No+Thumb',
+            backdrop: 'https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/img/lib/imgFallback.jpg?text=No+Backdrop'
         };
         this.screenSizes = {
             mobile: 'small',
