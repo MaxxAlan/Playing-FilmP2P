@@ -1,7 +1,5 @@
 \# 🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
 
-
-
 Website xem phim online được xây dựng với \*\*static frontend + Google Drive\*\* làm media storage, không cần backend server. Giao diện đẹp mắt, tính năng phong phú như các website xem phim chuyên nghiệp.
 
 ## 🔄 Cập nhật 2025-10: JSON từ Internet + Hỗ trợ phim bộ
@@ -41,11 +39,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 ## 🚀 Tính năng chính
 
-
-
 \### 🎯 Tính năng cốt lõi
-
-
 
 \- ✅ \*\*Static Frontend\*\*: Host trên GitHub Pages (HTML + CSS + JS tĩnh)
 
@@ -55,11 +49,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- ✅ \*\*Multi-page Structure\*\*: Trang chủ, thể loại, tìm kiếm, giới thiệu, liên hệ
 
-
-
 \### 🔍 Tìm kiếm \& Lọc nâng cao
-
-
 
 \- ✅ \*\*Tìm kiếm thông minh\*\*: Tìm phim theo tên, mô tả, thể loại
 
@@ -69,11 +59,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- ✅ \*\*Sắp xếp\*\*: Theo tên, năm, đánh giá, thời lượng
 
-
-
 \### 🎨 Giao diện \& Trải nghiệm
-
-
 
 \- ✅ \*\*Load More\*\*: Pagination với nút "Xem thêm"
 
@@ -81,33 +67,17 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- ✅ \*\*Loading States\*\*: Animation loading mượt mà
 
-
-
 \### 🎬 Video Player
-
-
 
 \- ✅ \*\*Google Drive Player\*\*: Iframe player tích hợp
 
 \- ✅ \*\*Fullscreen Support\*\*: Toàn màn hình với phím tắt
 
-
-
-
-
 \### 📱 Responsive \& Mobile
-
-
 
 \- ✅ \*\*Mobile Optimized\*\*: Tối ưu cho điện thoại
 
-
-
-
-
 \## 📁 Cấu trúc thư mục
-
-
 
 ```
 
@@ -159,15 +129,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 ```
 
-
-
 \## 🎯 Cách hoạt động
 
-
-
 \### 1. Multi-page Architecture
-
-
 
 \- \*\*Trang chủ\*\* (`index.html`): Hiển thị danh sách phim với grid/list view, tìm kiếm cơ bản
 
@@ -181,25 +145,17 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*404\*\* (`404.html`): Trang lỗi thân thiện với gợi ý phim
 
-
-
 \### 2. Frontend (GitHub Pages)
-
-
 
 \- Host toàn bộ code tĩnh trên GitHub Pages
 
-\- Load danh sách phim từ JSON REMOTE: `https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/main/movies.json`
+\- Load danh sách phim từ JSON
 
 \- Render giao diện responsive với CSS Grid/Flexbox
 
 \- JavaScript modules cho từng trang riêng biệt
 
-
-
 \### 3. Media Storage (Google Drive)
-
-
 
 \- Upload video và poster lên Google Drive
 
@@ -209,11 +165,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- CDN của Google Drive cho tốc độ tải nhanh
 
-
-
 \### 4. Metadata \& Data Management
-
-
 
 \- File `movies.json` (REMOTE) chứa thông tin chi tiết phim
 
@@ -221,53 +173,35 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- URL parameters để navigation giữa các trang
 
-
-
 \## 🛠️ Cài đặt và triển khai
-
-
 
 \### Bước 1: Chuẩn bị Google Drive
 
-
-
 1\. \*\*Upload video lên Google Drive\*\*:
 
+&nbsp; - Tạo thư mục riêng cho videos
 
+&nbsp; - Upload file video (MP4, AVI, MKV...)
 
-&nbsp;  - Tạo thư mục riêng cho videos
-
-&nbsp;  - Upload file video (MP4, AVI, MKV...)
-
-&nbsp;  - Đặt quyền "Anyone with the link can view"
-
-
+&nbsp; - Đặt quyền "Anyone with the link can view"
 
 2\. \*\*Lấy Drive ID\*\*:
 
+&nbsp; ```
 
+&nbsp; Link chia sẻ: https://drive.google.com/file/d/1XyzABCdEfGhIJklMNopQRsTuVw/view
 
-&nbsp;  ```
+&nbsp; Drive ID: 1XyzABCdEfGhIJklMNopQRsTuVw
 
-&nbsp;  Link chia sẻ: https://drive.google.com/file/d/1XyzABCdEfGhIJklMNopQRsTuVw/view
-
-&nbsp;  Drive ID: 1XyzABCdEfGhIJklMNopQRsTuVw
-
-&nbsp;  ```
-
-
+&nbsp; ```
 
 3\. \*\*Tạo poster/thumbnail\*\*:
 
-&nbsp;  - Chụp ảnh màn hình hoặc tìm poster
+&nbsp; - Chụp ảnh màn hình hoặc tìm poster
 
-&nbsp;  - Upload lên Google Drive hoặc dùng URL khác
-
-
+&nbsp; - Upload lên Google Drive hoặc dùng URL khác
 
 \### Bước 2: Cập nhật movies.json (REMOTE)
-
-
 
 - Chỉnh sửa file `movies.json` trong repository chứa dữ liệu, sau đó dùng GitHub Raw làm URL để ứng dụng tải về.
 
@@ -301,65 +235,47 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 - `category`: Phân loại (phim-le, phim-bo, phim-hoat-hinh, phim-tai-lieu)
 
-
-
 \### Bước 3: Deploy lên GitHub Pages
-
-
 
 1\. \*\*Tạo repository mới\*\*:
 
+&nbsp; ```bash
 
+&nbsp; git init
 
-&nbsp;  ```bash
+&nbsp; git add .
 
-&nbsp;  git init
+&nbsp; git commit -m "Initial commit"
 
-&nbsp;  git add .
+&nbsp; git branch -M main
 
-&nbsp;  git commit -m "Initial commit"
+&nbsp; git remote add origin https://github.com/username/movie-site.git
 
-&nbsp;  git branch -M main
+&nbsp; git push -u origin main
 
-&nbsp;  git remote add origin https://github.com/username/movie-site.git
-
-&nbsp;  git push -u origin main
-
-&nbsp;  ```
-
-
+&nbsp; ```
 
 2\. \*\*Kích hoạt GitHub Pages\*\*:
 
+&nbsp; - Vào Settings → Pages
 
+&nbsp; - Chọn Source: Deploy from a branch
 
-&nbsp;  - Vào Settings → Pages
+&nbsp; - Chọn Branch: main / (root)
 
-&nbsp;  - Chọn Source: Deploy from a branch
-
-&nbsp;  - Chọn Branch: main / (root)
-
-&nbsp;  - Save
-
-
+&nbsp; - Save
 
 3\. \*\*Truy cập website\*\*:
 
-&nbsp;  ```
+&nbsp; ```
 
-&nbsp;  https://username.github.io/movie-site
+&nbsp; https://username.github.io/movie-site
 
-&nbsp;  ```
-
-
+&nbsp; ```
 
 \## 🎮 Cách sử dụng
 
-
-
 \### 👤 Cho người dùng cuối
-
-
 
 1\. \*\*Xem phim\*\*: Click vào poster phim → Chọn "Xem ngay"
 
@@ -371,15 +287,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 5\. \*\*Lịch sử xem\*\*: Tự động lưu, xem lại trong sidebar
 
-
-
 \### 🛠️ Cho quản trị viên
 
-
-
 \#### Thêm phim mới
-
-
 
 1\. Upload video lên Google Drive
 
@@ -391,11 +301,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 5\. Commit và push lên GitHub (repo chứa JSON)
 
-
-
 \#### Cập nhật thông tin phim
-
-
 
 1\. Chỉnh sửa `movies.json` trong repo REMOTE
 
@@ -403,11 +309,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 3\. Website sẽ tự động cập nhật
 
-
-
 \#### Quản lý nội dung
-
-
 
 \- \*\*Categories\*\*: Thêm/xóa categories trong categories.js
 
@@ -417,15 +319,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*About\*\*: Chỉnh sửa nội dung giới thiệu trong about.html
 
-
-
 \## 🔧 Tùy chỉnh
 
-
-
 \### 🎨 Thay đổi giao diện
-
-
 
 \- \*\*Màu sắc\*\*: Chỉnh sửa CSS variables trong `style.css`
 
@@ -435,17 +331,13 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*Animations\*\*: Thêm CSS animations và transitions
 
-\- \*\*Mobile\*\*: Tùy chỉnh responsive breakpoints 
-
-
+\- \*\*Mobile\*\*: Tùy chỉnh responsive breakpoints
 
 \### 🚀 Thêm tính năng mới
 
-
-
 \- \*\*Phân trang\*\*: Thêm pagination cho danh sách phim
 
-\- \*\*Playlist\*\*: Tạo danh sách phát tự động 
+\- \*\*Playlist\*\*: Tạo danh sách phát tự động
 
 \- \*\*Đánh giá\*\*: Cho phép user đánh giá phim (upload late)
 
@@ -457,11 +349,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*Recommendations\*\*: Gợi ý phim tương tự (upload late)
 
-
-
 \### 📱 Responsive Design
-
-
 
 \- \*\*Breakpoints\*\*: 768px (tablet), 480px (mobile) (upload late)
 
@@ -471,11 +359,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*Touch targets\*\*: Buttons đủ lớn cho mobile (upload late)
 
-
-
 \### 🔍 SEO Optimization
-
-
 
 \- \*\*Meta tags\*\*: Động cho từng phim (upload late)
 
@@ -487,15 +371,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*Performance\*\*: Optimize images, lazy loading (upload late)
 
-
-
 \## ⚠️ Lưu ý quan trọng
 
-
-
 \### Giới hạn Google Drive
-
-
 
 \- \*\*Băng thông\*\*: 100-200GB/ngày/file
 
@@ -503,11 +381,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*File size\*\*: Tối đa 5TB/file (Google Drive limit)
 
-
-
 \### Bảo mật
-
-
 
 \- Không có authentication system
 
@@ -515,11 +389,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- Không lưu user data (chỉ localStorage)
 
-
-
 \### Performance
-
-
 
 \- Static files load nhanh
 
@@ -527,15 +397,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- Có thể cache JSON với service worker
 
-
-
 \## 🚀 Tính năng nâng cao (Roadmap)
 
-
-
 \### 📱 PWA \& Performance
-
-
 
 \- \[ ] \*\*Service Worker\*\*: Cache offline cho phim đã xem
 
@@ -545,11 +409,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Image Optimization\*\*: WebP format, responsive images
 
-
-
 \### 🔍 Search \& Discovery
-
-
 
 \- \[ ] \*\*Search API\*\*: Algolia hoặc Elasticsearch integration
 
@@ -561,11 +421,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Similar Movies\*\*: Phim tương tự
 
-
-
 \### 👥 Social Features
-
-
 
 \- \[ ] \*\*User Accounts\*\*: Đăng ký/đăng nhập
 
@@ -579,11 +435,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*User Profiles\*\*: Trang cá nhân
 
-
-
 \### 🎬 Video Features
-
-
 
 \- \[ ] \*\*Subtitle support\*\*: VTT files với multiple languages
 
@@ -595,11 +447,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Picture-in-Picture\*\*: PiP mode support
 
-
-
 \### 📊 Analytics \& Admin
-
-
 
 \- \[ ] \*\*Google Analytics\*\*: Track user behavior
 
@@ -611,11 +459,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Reports\*\*: Viewing statistics, popular movies
 
-
-
 \### 🔧 Technical Enhancements
-
-
 
 \- \[ ] \*\*API Backend\*\*: Node.js/Express backend
 
@@ -627,19 +471,11 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Monitoring\*\*: Error tracking, uptime monitoring
 
-
-
 \## 📞 Hỗ trợ
-
-
 
 \### 🐛 Troubleshooting
 
-
-
 \#### Video không phát được
-
-
 
 1\. Kiểm tra Google Drive link có public không
 
@@ -649,11 +485,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Kiểm tra internet connection
 
-
-
 \#### Website không load
-
-
 
 1\. Kiểm tra GitHub Pages có hoạt động không
 
@@ -663,11 +495,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Clear browser cache
 
-
-
 \#### Mobile không responsive
-
-
 
 1\. Kiểm tra viewport meta tag
 
@@ -677,11 +505,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Kiểm tra touch events
 
-
-
 \### 📧 Liên hệ
-
-
 
 \- \*\*Email\*\*: aizasybxitjpvbi@zohomail.com
 
@@ -693,11 +517,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*TikTok\*\*: https://www.tiktok.com/@abcxyz
 
-
-
 \### 🔧 Technical Support
-
-
 
 \- \*\*GitHub Issues\*\*: Báo bug hoặc feature request
 
@@ -705,19 +525,11 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \*\*Community\*\*: Tham gia discussion trong Issues
 
-
-
 \## 📄 License
-
-
 
 MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân và thương mại.
 
-
-
 \## 🙏 Credits
-
-
 
 \- \*\*Design\*\*: Modern UI/UX với CSS Grid \& Flexbox
 
@@ -729,23 +541,13 @@ MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân v
 
 \- \*\*Video\*\*: Google Drive cho hosting
 
-
-
 ---
-
-
 
 \*\*🎬 Chúc bạn có trải nghiệm xem phim tuyệt vời!\*\*
 
-
-
 \_Website được phát triển bởi Hoang Manh - 2025\_
 
-
-
 \## Movie JSON Editor (tool bổ trợ)
-
-
 
 Đã thêm `movie-editor.html` và `assets/js/movie-editor.js` — trang nhập liệu để tạo/biên tập danh sách phim và xuất file `movies.json` để upload lên repository REMOTE.
 
@@ -754,6 +556,3 @@ MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân v
 - Điền `id`, `title` và các trường khác. `genre` dùng dấu phẩy để phân tách; với phim bộ, thêm trường `episodes` theo schema ở phần cập nhật.
 
 - Dùng "Thêm vào list" để quản lý danh sách, "Tải JSON" để lưu file, sau đó upload lên repo REMOTE (GitHub Raw).
-
-
-
