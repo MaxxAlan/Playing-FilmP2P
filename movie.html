@@ -69,11 +69,11 @@
                 </div>
 
                 <div class="movie-description">
-                    <p id="movie-description">Đang tải mô tả...</p>
+                    <p id="movie-desc">Đang tải mô tả...</p>
                 </div>
 
                 <div class="movie-genres">
-                    <div id="movie-genres" class="genre-tags"></div>
+                    <div id="movie-genre" class="genre-tags"></div>
                 </div>
 
                 <div class="movie-actions">
@@ -112,6 +112,8 @@
     <!-- Toast Notifications -->
     <div class="toast-container" id="toast-container"></div>
 
+    <!-- Fix relative fetch path expected by player.js (rewrites ../data/* to data/* from this page) -->
+    <script>(function(){var of=window.fetch;window.fetch=function(i,n){if(typeof i==='string'&&i.indexOf('../data/')===0){i=i.replace('../data/','data/');}return of(i,n);};})();</script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/player.js"></script>
 </body>

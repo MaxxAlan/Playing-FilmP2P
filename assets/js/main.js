@@ -164,7 +164,10 @@ class MovieApp {
         const watchedBadge = isWatched ? '<span class="watched-badge">Đã xem</span>' : '';
 
         // Tạo poster image với ImageManager
-        const posterUrl = ImageUtils.getPosterUrl(movie, this.getOptimalImageSize());
+        // Lấy poster URL an toàn (fallback nếu ImageUtils chưa sẵn sàng)
+        const posterUrl = (window.ImageUtils && typeof ImageUtils.getPosterUrl === 'function')
+            ? ImageUtils.getPosterUrl(movie, this.getOptimalImageSize())
+            : (movie.poster && (movie.poster.large || movie.poster.medium || movie.poster.small || movie.poster.original)) || '';
         
         article.innerHTML = `
             <div class="movie-poster">
@@ -237,6 +240,13 @@ class MovieApp {
                 const btn = e.target.closest('.share-btn');
                 const movieId = btn.dataset.movieId;
                 this.shareMovie(movieId);
+            } else if (e.target.classList.contains('genre-tag')) {
+                // Click vào tag thể loại để lọc theo thể loại
+                const genre = e.target.textContent.trim();
+                this.currentFilter = 'all';
+                this.filterMoviesByGenre(genre);
+                this.currentPage = 1;
+                this.renderMovies();
             }
         });
 
@@ -354,7 +364,18 @@ class MovieApp {
         const movie = this.movies.find(m => m.id === movieId);
         if (!movie) return;
 
-        const url = `${window.location.origin}/movie.html?id=${movieId}`;
+        // Xây dựng URL chia sẻ hoạt động cả khi chạy local file và khi deploy
+        let baseUrl;
+        if (window.location.origin && window.location.origin !== 'null') {
+            // Trường hợp chạy qua HTTP server
+            const origin = window.location.origin;
+            const basePath = window.location.pathname.replace(/index\.html$/i, '');
+            baseUrl = origin + basePath;
+        } else {
+            // Trường hợp mở file trực tiếp
+            baseUrl = './';
+        }
+        const url = `${baseUrl}movie.html?id=${movieId}`;
         const title = movie.title;
         const text = `Xem phim ${title} trên Xem Phim Online`;
 
