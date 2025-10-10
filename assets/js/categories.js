@@ -27,7 +27,11 @@
 
   function applyFilters(movies, category, genreTerm) {
     return movies.filter(m => {
-      const okCategory = !category || String(m.category) === String(category);
+      const okCategory =
+  	!category ||
+  	(Array.isArray(m.category) && m.category.includes(category));
+
+
       const okGenre = !genreTerm || (m.genre||[]).join(' ').toLowerCase().includes(genreTerm);
       return okCategory && okGenre;
     });
