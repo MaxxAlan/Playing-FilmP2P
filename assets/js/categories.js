@@ -1,7 +1,10 @@
 (async function() {
   const { $, $$, fetchJSON, html, createElementFromHTML } = window.$u;
+
+  // danh sách categories có sẵn, bạn có thể thêm/bớt
+  const ALL_CATEGORIES = ['phim-le', 'phim-bo', 'hoat-hinh', 'tv-show', 'tai-lieu'];
+
   const params = new URLSearchParams(location.search);
-  const initialCategory = params.get('category') || '';
 
   function item(movie) {
     return html`
@@ -25,13 +28,33 @@
     host.appendChild(frag);
   }
 
-  function applyFilters(movies, category, genreTerm) {
+  // render checkbox categories
+  function renderCategoryFilters() {
+    const container = $('#categoryFilters');
+    if (!container) return;
+    container.innerHTML = '';
+    ALL_CATEGORIES.forEach(cat => {
+      const id = `cat-${cat}`;
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <label>
+          <input type="checkbox" value="${cat}" id="${id}" />
+          ${cat}
+        </label>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function getSelectedCategories() {
+    const checked = Array.from($('#categoryFilters input[type="checkbox"]:checked')).map(i => i.value);
+    return checked;
+  }
+
+  function applyFilters(movies, selectedCategories, genreTerm) {
     return movies.filter(m => {
-      const okCategory =
-  	!category ||
-  	(Array.isArray(m.category) && m.category.includes(category));
-
-
+      const okCategory = !selectedCategories.length || 
+        (Array.isArray(m.category) && selectedCategories.every(cat => m.category.includes(cat)));
       const okGenre = !genreTerm || (m.genre||[]).join(' ').toLowerCase().includes(genreTerm);
       return okCategory && okGenre;
     });
@@ -39,23 +62,26 @@
 
   try {
     const data = await fetchJSON('https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/main/movies.json');
-    $('#categorySelect').value = initialCategory;
-    let current = applyFilters(data, initialCategory, '');
+    renderCategoryFilters();
+    let current = applyFilters(data, [], '');
     render(current);
 
-    $('#categorySelect').addEventListener('change', (e) => {
+    // lắng nghe thay đổi checkbox
+    $('#categoryFilters').addEventListener('change', () => {
+      const selected = getSelectedCategories();
       const g = $('#genreInput').value.trim().toLowerCase();
-      current = applyFilters(data, e.target.value, g);
+      current = applyFilters(data, selected, g);
       render(current);
     });
+
+    // lắng nghe input genre
     $('#genreInput').addEventListener('input', (e) => {
-      const c = $('#categorySelect').value;
-      current = applyFilters(data, c, e.target.value.trim().toLowerCase());
+      const selected = getSelectedCategories();
+      current = applyFilters(data, selected, e.target.value.trim().toLowerCase());
       render(current);
     });
+
   } catch (e) {
     console.error(e);
   }
 })();
-
-
