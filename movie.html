@@ -1,122 +1,52 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xem Phim Online - Player</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xem phim</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .player-wrap { width: min(1200px, 92%); margin: 18px auto; }
+    .player { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 12px; background: #0e1116; }
+    .movie-info { width: min(1200px, 92%); margin: 10px auto 32px; color: var(--text); }
+    .movie-info h1 { margin: 0 0 6px; font-size: 22px; }
+    .movie-info .muted { color: var(--muted); font-size: 14px; }
+  </style>
 </head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">🎬 Xem Phim</a>
+      <nav class="nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="categories.html">Thể loại</a>
+        <a href="search.html">Tìm kiếm</a>
+      </nav>
+    </div>
+  </header>
 
-<body class="netflix-player">
+  <main>
+    <div class="player-wrap">
+      <iframe id="gdPlayer" class="player" allowfullscreen></iframe>
+    </div>
+    <div id="episodes" class="episodes"></div>
+    <div class="movie-info">
+      <h1 id="title"></h1>
+      <div class="muted" id="meta"></div>
+      <p id="desc"></p>
+    </div>
+  </main>
 
-    <nav class="netflix-nav" aria-hidden="false">
-        <div class="nav-content">
-            <a class="nav-back" href="index.html">Back</a>
-            <div class="nav-title" id="movie-title">Đang tải...</div>
-            <div class="nav-actions"></div>
-        </div>
-    </nav>
+  <footer class="site-footer">
+    <div class="container">
+      <p>Tip: nhấn F để bật toàn màn hình.</p>
+    </div>
+  </footer>
 
-    <!-- Main Video Player -->
-    <main class="netflix-main">
-        <div class="video-player-container">
-            <div class="video-wrapper" id="player-container">
-                <!-- Video iframe sẽ được thêm bởi JavaScript -->
-            </div>
-
-            <!-- Loading Overlay -->
-            <div class="loading-overlay" id="loading-overlay">
-                <div class="loading-spinner">
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                    <div class="spinner-ring"></div>
-                </div>
-                <p>Đang tải video...</p>
-            </div>
-
-            <!-- Error Overlay -->
-            <div class="error-overlay" id="error-overlay">
-                <div class="error-content">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-                        <line x1="15" y1="9" x2="9" y2="15" stroke="currentColor" stroke-width="2" />
-                        <line x1="9" y1="9" x2="15" y2="15" stroke="currentColor" stroke-width="2" />
-                    </svg>
-                    <h3>Không thể tải video</h3>
-                    <p id="error-message">Vui lòng thử lại sau</p>
-                    <button class="retry-btn" onclick="location.reload()">Thử lại</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Movie Details Panel -->
-        <div class="movie-details-panel">
-            <div class="movie-info">
-                <div class="movie-poster-container">
-                    <img id="movie-poster" src="" alt="Movie Poster" class="movie-poster">
-                </div>
-                <div class="movie-header">
-                    <h1 id="movie-title-detail">Đang tải...</h1>
-                    <div class="movie-meta">
-                        <span id="movie-year" class="meta-item">9999</span>
-                        <span id="movie-duration" class="meta-item">9999 phút</span>
-                        <span id="movie-rating" class="meta-item rating">⭐ 99999</span>
-                    </div>
-                </div>
-
-                <div class="movie-description">
-                    <p id="movie-desc">Đang tải mô tả...</p>
-                </div>
-
-                <div class="movie-genres">
-                    <div id="movie-genre" class="genre-tags"></div>
-                </div>
-
-                <div class="movie-actions">
-                    <button class="action-btn primary" id="play-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        Phát
-                    </button>
-                    <button class="action-btn secondary" id="add-to-list-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        Danh sách
-                    </button>
-                    <button class="action-btn secondary" id="share-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M4 12V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V12M16 8L12 4M12 4L8 8M12 4V16"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Chia sẻ
-                    </button>
-                </div>
-
-                <div class="movie-gallery">
-                    <h2>Gallery</h2>
-                    <div id="movie-gallery-images" class="gallery-images"></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Toast Notifications -->
-    <div class="toast-container" id="toast-container"></div>
-
-    <!-- Fix relative fetch path expected by player.js (rewrites ../data/* to data/* from this page) -->
-    <script>(function(){var of=window.fetch;window.fetch=function(i,n){if(typeof i==='string'&&i.indexOf('../data/')===0){i=i.replace('../data/','data/');}return of(i,n);};})();</script>
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/image-manager.js"></script>
-    <script src="assets/js/player.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/player.js"></script>
 </body>
-
 </html>
+
+
