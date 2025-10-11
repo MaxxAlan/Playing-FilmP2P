@@ -1,6 +1,6 @@
  🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
 
-Website xem phim online được xây dựng với \*\*static frontend + Google Drive\*\* làm media storage, không cần backend server. Giao diện đẹp mắt, tính năng phong phú như các website xem phim chuyên nghiệp.
+Website xem phim online được xây dựng với     static frontend + Google Drive     làm media storage, không cần backend server. Giao diện đẹp mắt, tính năng phong phú như các website xem phim chuyên nghiệp.
 
 LINK OF WEBSITE: https://maxxalan.github.io/Playing-FilmP2P
 
@@ -78,7 +78,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 # 📱 Responsive \& Mobile
 
-\- ✅ Mobile Optimized: Tối ưu cho điện thoại
+  ✅ Mobile Optimized: Tối ưu cho điện thoại
 
 # 📁 Cấu trúc thư mục
 
@@ -238,9 +238,9 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 - `category`: Phân loại (phim-le, phim-bo, phim-hoat-hinh, phim-tai-lieu)
 
-\### Bước 3: Deploy lên GitHub Pages
+        # Bước 3: Deploy lên GitHub Pages
 
-1\. \*\*Tạo repository mới\*\*:
+1\.     Tạo repository mới    :
 
 &nbsp; ```bash
 
@@ -258,7 +258,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 &nbsp; ```
 
-2\. \*\*Kích hoạt GitHub Pages\*\*:
+2\.     Kích hoạt GitHub Pages    :
 
 &nbsp; - Vào Settings → Pages
 
@@ -268,7 +268,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 &nbsp; - Save
 
-3\. \*\*Truy cập website\*\*:
+3\.     Truy cập website    :
 
 &nbsp; ```
 
@@ -276,23 +276,23 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 &nbsp; ```
 
-\## 🎮 Cách sử dụng
+    # 🎮 Cách sử dụng
 
-\### 👤 Cho người dùng cuối
+        # 👤 Cho người dùng cuối
 
-1\. \*\*Xem phim\*\*: Click vào poster phim → Chọn "Xem ngay"
+1\.     Xem phim    : Click vào poster phim → Chọn "Xem ngay"
 
-2\. \*\*Tìm kiếm\*\*: Dùng thanh tìm kiếm hoặc trang Search nâng cao
+2\.     Tìm kiếm    : Dùng thanh tìm kiếm hoặc trang Search nâng cao
 
-3\. \*\*Duyệt thể loại\*\*: Vào trang Categories để xem theo thể loại
+3\.     Duyệt thể loại    : Vào trang Categories để xem theo thể loại
 
-4\. \*\*Chuyển đổi view\*\*: Toggle giữa Grid và List view
+4\.     Chuyển đổi view    : Toggle giữa Grid và List view
 
-5\. \*\*Lịch sử xem\*\*: Tự động lưu, xem lại trong sidebar
+5\.     Lịch sử xem    : Tự động lưu, xem lại trong sidebar
 
-\### 🛠️ Cho quản trị viên
+        # 🛠️ Cho quản trị viên
 
-\#### Thêm phim mới
+        ## Thêm phim mới
 
 1\. Upload video lên Google Drive
 
@@ -304,7 +304,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 5\. Commit và push lên GitHub (repo chứa JSON)
 
-\#### Cập nhật thông tin phim
+        ## Cập nhật thông tin phim
 
 1\. Chỉnh sửa `movies.json` trong repo REMOTE
 
@@ -312,155 +312,161 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 3\. Website sẽ tự động cập nhật
 
-\#### Quản lý nội dung
 
-\- \*\*Categories\*\*: Thêm/xóa categories trong categories.js
+# Quản lý nội dung
 
-\- \*\*Genres\*\*: Cập nhật danh sách genre trong search.html
+      Categories    : Thêm/xóa categories trong categories.js
 
-\- \*\*Contact Info\*\*: Cập nhật thông tin liên hệ trong contact.html
+      Genres    : Cập nhật danh sách genre trong search.html
 
-\- \*\*About\*\*: Chỉnh sửa nội dung giới thiệu trong about.html
+      Contact Info    : Cập nhật thông tin liên hệ trong contact.html
 
-\## 🔧 Tùy chỉnh
+      About    : Chỉnh sửa nội dung giới thiệu trong about.html
 
-\### 🎨 Thay đổi giao diện
+# 🔧 Tùy chỉnh
 
-\- \*\*Màu sắc\*\*: Chỉnh sửa CSS variables trong `style.css`
+   # 🎨 Thay đổi giao diện
 
-\- \*\*Layout\*\*: Thay đổi grid columns, spacing
+      Màu sắc    : Chỉnh sửa CSS variables trong `style.css`
 
-\- \*\*Typography\*\*: Cập nhật fonts, sizes
+      Layout    : Thay đổi grid columns, spacing
 
-\- \*\*Animations\*\*: Thêm CSS animations và transitions
+      Typography    : Cập nhật fonts, sizes
 
-\- \*\*Mobile\*\*: Tùy chỉnh responsive breakpoints
+      Animations    : Thêm CSS animations và transitions
 
-\### 🚀 Thêm tính năng mới
+      Mobile    : Tùy chỉnh responsive breakpoints
 
-\- \*\*Phân trang\*\*: Thêm pagination cho danh sách phim
 
-\- \*\*Playlist\*\*: Tạo danh sách phát tự động
+# 🚀 Thêm tính năng mới
 
-\- \*\*Đánh giá\*\*: Cho phép user đánh giá phim (upload late)
+      Phân trang    : Thêm pagination cho danh sách phim
 
-\- \*\*Bình luận\*\*: Tích hợp Disqus hoặc similar
+      Playlist    : Tạo danh sách phát tự động
 
-\- \*\*Favorites\*\*: Lưu phim yêu thích (upload late)
+      Đánh giá    : Cho phép user đánh giá phim (upload late)
 
-\- \*\*Watch Later\*\*: Danh sách xem sau (upload late)
+      Bình luận    : Tích hợp Disqus hoặc similar
 
-\- \*\*Recommendations\*\*: Gợi ý phim tương tự (upload late)
+      Favorites    : Lưu phim yêu thích (upload late)
 
-\### 📱 Responsive Design
+      Watch Later    : Danh sách xem sau (upload late)
 
-\- \*\*Breakpoints\*\*: 768px (tablet), 480px (mobile) (upload late)
+      Recommendations    : Gợi ý phim tương tự (upload late)
 
-\- \*\*Touch gestures\*\*: Swipe, pinch-to-zoom (upload late)
 
-\- \*\*Mobile menu\*\*: Hamburger menu cho mobile (upload late)
+# 📱 Responsive Design
 
-\- \*\*Touch targets\*\*: Buttons đủ lớn cho mobile (upload late)
+      Breakpoints    : 768px (tablet), 480px (mobile) (upload late)
 
-\### 🔍 SEO Optimization
+      Touch gestures    : Swipe, pinch-to-zoom (upload late)
 
-\- \*\*Meta tags\*\*: Động cho từng phim (upload late)
+      Mobile menu    : Hamburger menu cho mobile (upload late)
 
-\- \*\*Sitemap\*\*: Tạo sitemap.xml (upload late)
+      Touch targets    : Buttons đủ lớn cho mobile (upload late)
 
-\- \*\*Structured data\*\*: JSON-LD cho movies (upload late)
 
-\- \*\*Open Graph\*\*: Tags cho social sharing (upload late)
+# 🔍 SEO Optimization
 
-\- \*\*Performance\*\*: Optimize images, lazy loading (upload late)
+      Meta tags    : Động cho từng phim (upload late)
 
-\## ⚠️ Lưu ý quan trọng
+      Sitemap    : Tạo sitemap.xml (upload late)
 
-\### Giới hạn Google Drive
+      Structured data    : JSON-LD cho movies (upload late)
 
-\- \*\*Băng thông\*\*: 100-200GB/ngày/file
+      Open Graph    : Tags cho social sharing (upload late)
 
-\- \*\*Concurrent viewers\*\*: ~100 người xem đồng thời
+      Performance    : Optimize images, lazy loading (upload late)
+   
+   
+ # ⚠️ Lưu ý quan trọng
 
-\- \*\*File size\*\*: Tối đa 5TB/file (Google Drive limit)
+   # Giới hạn Google Drive
 
-\### Bảo mật
+   Băng thông    : 100-200GB/ngày/file
 
-\- Không có authentication system
+   Concurrent viewers    : ~100 người xem đồng thời
 
-\- Ai có link đều xem được
+   File size    : Tối đa 5TB/file (Google Drive limit)
 
-\- Không lưu user data (chỉ localStorage)
+ # Bảo mật
 
-\### Performance
+   Không có authentication system
 
-\- Static files load nhanh
+   Ai có link đều xem được
 
-\- Google Drive CDN tốt
+   Không lưu user data (chỉ localStorage)
 
-\- Có thể cache JSON với service worker
+ # Performance
 
-\## 🚀 Tính năng nâng cao (Roadmap)
+   Static files load nhanh
 
-\### 📱 PWA \& Performance
+  Google Drive CDN tốt
 
-\- \[ ] \*\*Service Worker\*\*: Cache offline cho phim đã xem
+  Có thể cache JSON với service worker
 
-\- \[ ] \*\*PWA\*\*: Progressive Web App với install prompt
+  # 🚀 Tính năng nâng cao (Roadmap)
 
-\- \[ ] \*\*Lazy Loading\*\*: Load images khi cần thiết
+   # 📱 PWA \& Performance
 
-\- \[ ] \*\*Image Optimization\*\*: WebP format, responsive images
+  \[ ]     Service Worker    : Cache offline cho phim đã xem
 
-\### 🔍 Search \& Discovery
+  \[ ]     PWA    : Progressive Web App với install prompt
 
-\- \[ ] \*\*Search API\*\*: Algolia hoặc Elasticsearch integration
+  \[ ]     Lazy Loading    : Load images khi cần thiết
 
-\- \[ ] \*\*Smart Recommendations\*\*: AI-based movie suggestions
+  \[ ]     Image Optimization    : WebP format, responsive images
 
-\- \[ ] \*\*Trending Movies\*\*: Phim đang hot
+   # 🔍 Search \& Discovery
 
-\- \[ ] \*\*Recently Added\*\*: Phim mới nhất
+  \[ ]     Search API    : Algolia hoặc Elasticsearch integration
 
-\- \[ ] \*\*Similar Movies\*\*: Phim tương tự
+  \[ ]     Smart Recommendations    : AI-based movie suggestions
 
-\### 👥 Social Features
+  \[ ]     Trending Movies    : Phim đang hot
 
-\- \[ ] \*\*User Accounts\*\*: Đăng ký/đăng nhập
+  \[ ]     Recently Added    : Phim mới nhất
 
-\- \[ ] \*\*Comments\*\*: Disqus integration
+  \[ ]     Similar Movies    : Phim tương tự
 
-\- \[ ] \*\*Ratings\*\*: User rating system
+# 👥 Social Features
 
-\- \[ ] \*\*Reviews\*\*: Viết review phim
+  \[ ]     User Accounts    : Đăng ký/đăng nhập
 
-\- \[ ] \*\*Social Sharing\*\*: Share lên social media
+  \[ ]     Comments    : Disqus integration
 
-\- \[ ] \*\*User Profiles\*\*: Trang cá nhân
+  \[ ]     Ratings    : User rating system
 
-\### 🎬 Video Features
+  \[ ]     Reviews    : Viết review phim
 
-\- \[ ] \*\*Subtitle support\*\*: VTT files với multiple languages
+  \[ ]     Social Sharing    : Share lên social media
 
-\- \[ ] \*\*Multiple quality\*\*: 720p, 1080p, 4K options
+  \[ ]     User Profiles    : Trang cá nhân
 
-\- \[ ] \*\*Auto-play next\*\*: Play next episode automatically
+  
+# 🎬 Video Features
 
-\- \[ ] \*\*Playback speed\*\*: 0.5x, 1x, 1.25x, 1.5x, 2x
+  \[ ]     Subtitle support    : VTT files với multiple languages
 
-\- \[ ] \*\*Picture-in-Picture\*\*: PiP mode support
+  \[ ]     Multiple quality    : 720p, 1080p, 4K options
+
+  \[ ]     Auto-play next    : Play next episode automatically
+
+  \[ ]     Playback speed    : 0.5x, 1x, 1.25x, 1.5x, 2x
+
+  \[ ]     Picture-in-Picture    : PiP mode support
 
 # 📊 Analytics \& Admin
 
-\- \[ ] Google Analytics: Track user behavior
+  \[ ] Google Analytics: Track user behavior
 
-\- \[ ] Admin Panel: Dashboard quản lý phim
+  \[ ] Admin Panel: Dashboard quản lý phim
 
-\- \[ ] Content Management: Easy add/edit movies
+  \[ ] Content Management: Easy add/edit movies
 
-\- \[ ] User Management: Manage users and permissions
+  \[ ] User Management: Manage users and permissions
 
-\- \[ ] Reports: Viewing statistics, popular movies
+  \[ ] Reports: Viewing statistics, popular movies
 
 # 🔧 Technical Enhancements
 
@@ -550,7 +556,7 @@ MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân v
 
 \_Website được phát triển bởi Hoang Manh - 2025\_
 
-\## Movie JSON Editor (tool bổ trợ)
+    # Movie JSON Editor (tool bổ trợ)
   
 TOOL: https://crytals-sc.github.io/json-link/  
 Đã thêm `movie-editor.html` và `assets/js/movie-editor.js` — trang nhập liệu để tạo/biên tập danh sách phim và xuất file `movies.json` để upload lên repository REMOTE.
