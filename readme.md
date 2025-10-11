@@ -1,8 +1,11 @@
-\# 🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
+\ 🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
 
 Website xem phim online được xây dựng với \*\*static frontend + Google Drive\*\* làm media storage, không cần backend server. Giao diện đẹp mắt, tính năng phong phú như các website xem phim chuyên nghiệp.
 
-## 🔄 Cập nhật 2025-10: JSON từ Internet + Hỗ trợ phim bộ
+LINK OF WEBSITE: https://maxxalan.github.io/Playing-FilmP2P
+
+
+# 🔄 Cập nhật 2025-10: JSON từ Internet + Hỗ trợ phim bộ
 
 - Dữ liệu phim nay được tải từ JSON REMOTE (GitHub Raw), không còn `data/movies.json` trong repo.
 - URL JSON hiện tại:
