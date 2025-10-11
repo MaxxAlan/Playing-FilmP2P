@@ -1,17 +1,27 @@
-// Categories Page Handler
-class CategoriesPage {
+// assets/js/categories.js - PHIÊN BẢN MỚI
+
+class MovieListPage {
     constructor() {
-        this.movies = [];
+        // DOM elements
+        this.listContainer = document.getElementById('list');
+        this.categorySelect = document.getElementById('categorySelect');
+        this.genreInput = document.getElementById('genreInput');
+
+        // Data
+        this.allMovies = []; // Lưu trữ toàn bộ phim
+        this.filteredMovies = []; // Lưu trữ phim đã được lọc
+
         this.init();
     }
+
     async init() {
         try {
             await this.loadMovies();
-            this.updateCategoryCounts();
+            this.renderMovies(this.allMovies); // Hiển thị tất cả lúc đầu
             this.bindEvents();
         } catch (error) {
-            console.error('Lỗi khi khởi tạo trang categories:', error);
-            this.showError('Không thể tải dữ liệu');
+            console.error('Lỗi khi khởi tạo trang:', error);
+            this.showError('Không thể tải danh sách phim. Vui lòng thử lại sau.');
         }
     }
 
@@ -21,148 +31,91 @@ class CategoriesPage {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            this.movies = await response.json();
-            console.log('Đã tải', this.movies.length, 'phim cho trang categories');
+            this.allMovies = await response.json();
+            console.log('Tải thành công', this.allMovies.length, 'phim.');
         } catch (error) {
-            console.error('Lỗi khi tải danh sách phim:', error);
+            console.error('Lỗi khi tải dữ liệu phim:', error);
             throw error;
         }
     }
 
-    updateCategoryCounts() {
-        // Đếm phim theo category
-        const categoryCounts = {};
-        const genreCounts = {};
-
-        this.movies.forEach(movie => {
-            // Đếm theo category
-            if (movie.category) {
-                categoryCounts[movie.category] = (categoryCounts[movie.category] || 0) + 1;
-            }
-
-            // Đếm theo genre
-            if (movie.genre && Array.isArray(movie.genre)) {
-                movie.genre.forEach(genre => {
-                    genreCounts[genre] = (genreCounts[genre] || 0) + 1;
-                });
-            }
-        });
-
-        // Cập nhật số lượng phim cho category cards
-        Object.keys(categoryCounts).forEach(category => {
-            const card = document.querySelector(`[data-category="${category}"]`);
-            if (card) {
-                const countElement = card.querySelector('.movie-count');
-                if (countElement) {
-                    countElement.textContent = `${categoryCounts[category]} phim`;
-                }
-            }
-        });
-
-        // Cập nhật số lượng phim cho genre cards
-        Object.keys(genreCounts).forEach(genre => {
-            const card = document.querySelector(`[data-genre="${genre}"]`);
-            if (card) {
-                const countElement = card.querySelector('.movie-count');
-                if (countElement) {
-                    countElement.textContent = `${genreCounts[genre]} phim`;
-                }
-            }
-        });
-
-        // Cập nhật genre tags
-        const genreTags = document.querySelectorAll('.genre-tag');
-        genreTags.forEach(tag => {
-            const genre = tag.dataset.genre;
-            const count = genreCounts[genre] || 0;
-            tag.title = `${count} phim`;
-        });
-    }
-
     bindEvents() {
-        // Category cards click events
-        const categoryCards = document.querySelectorAll('.category-card');
-        categoryCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const category = card.dataset.category;
-                const genre = card.dataset.genre;
-                
-                if (category) {
-                    this.navigateToCategory(category);
-                } else if (genre) {
-                    this.navigateToGenre(genre);
-                }
-            });
-        });
-
-        // Genre tags click events
-        const genreTags = document.querySelectorAll('.genre-tag');
-        genreTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                const genre = tag.dataset.genre;
-                this.navigateToGenre(genre);
-            });
-        });
-
-        // Add hover effects
-        categoryCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-5px)';
-                card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-            });
-        });
+        // Lắng nghe sự kiện trên cả 2 bộ lọc
+        this.categorySelect.addEventListener('change', () => this.applyFilters());
+        this.genreInput.addEventListener('input', () => this.applyFilters());
     }
 
-    navigateToCategory(category) {
-        // Chuyển đến trang chủ với filter category
-        const categoryNames = {
-            'phim-le': 'Phim Lẻ',
-            'phim-bo': 'Phim Bộ',
-            'phim-hoat-hinh': 'Phim Hoạt Hình',
-            'phim-tai-lieu': 'Phim Tài Liệu'
-        };
+    applyFilters() {
+        const selectedCategory = this.categorySelect.value;
+        const searchGenre = this.genreInput.value.toLowerCase().trim();
 
-        const categoryName = categoryNames[category] || category;
-        Utils.showToast(`Đang chuyển đến ${categoryName}...`, 'info', 1500);
+        this.filteredMovies = this.allMovies.filter(movie => {
+            // Lọc theo category
+            const categoryMatch = !selectedCategory || movie.category === selectedCategory;
+
+            // Lọc theo genre
+            const genreMatch = !searchGenre || 
+                (Array.isArray(movie.genre) && movie.genre.some(g => g.toLowerCase().includes(searchGenre)));
+            
+            return categoryMatch && genreMatch;
+        });
+
+        this.renderMovies(this.filteredMovies);
+    }
+
+// Thay thế hàm renderMovies trong file categories.js
+renderMovies(moviesToRender) {
+    // Xóa danh sách cũ
+    this.listContainer.innerHTML = '';
+
+    if (moviesToRender.length === 0) {
+        this.listContainer.innerHTML = '<p class="no-results">Không tìm thấy phim nào phù hợp.</p>';
+        return;
+    }
+
+    moviesToRender.forEach(movie => {
+        const movieLink = `player.html?id=${movie.id}`;
+        let tagsHTML = '';
+        if (Array.isArray(movie.genre) && movie.genre.length > 0) {
+            tagsHTML = movie.genre.map(g => `<span class="tag">${g}</span>`).join('');
+        }
         
-        setTimeout(() => {
-            window.location.href = `index.html?category=${category}`;
-        }, 1500);
-    }
-
-    navigateToGenre(genre) {
-        // Chuyển đến trang chủ với filter genre
-        Utils.showToast(`Đang tìm phim thể loại ${genre}...`, 'info', 1500);
-        
-        setTimeout(() => {
-            window.location.href = `index.html?genre=${genre}`;
-        }, 1500);
-    }
+        const movieCard = document.createElement('article');
+        movieCard.className = 'movie-card';
+        movieCard.innerHTML = `
+            <div class="card-image">
+                <img class="poster" src="${movie.poster}" alt="${movie.title}" loading="lazy" />
+                <div class="card-overlay">
+                    <div class="overlay-content">
+                        <div class="overlay-meta">
+                            <span>${movie.year || ''}</span> •
+                            <span>${movie.duration || ''}</span> •
+                            <span class="rating">⭐ ${movie.rating || ''}</span>
+                        </div>
+                        <div class="overlay-tags">${tagsHTML}</div>
+                        <div class="overlay-actions">
+                            <a class="btn primary" href="${movieLink}">Xem ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-base-info">
+                <h3 class="movie-title"><a href="${movieLink}">${movie.title}</a></h3>
+                <p class="movie-year">${movie.year || ''}</p>
+            </div>
+        `;
+        this.listContainer.appendChild(movieCard);
+    });
+}
 
     showError(message) {
         const main = document.querySelector('main');
         if (main) {
-            main.innerHTML = `
-                <div class="error-container">
-                    <h2>Lỗi</h2>
-                    <p>${message}</p>
-                    <div class="error-actions">
-                        <a href="index.html" class="back-to-home">Quay về trang chủ</a>
-                        <br>
-                        <button onclick="location.reload()" class="retry-btn">Thử lại</button>
-                    </div>
-                </div>
-            `;
+            main.innerHTML = `<div class="error-container"><p>${message}</p></div>`;
         }
     }
 }
 
-// Khởi tạo trang categories khi DOM đã load
 document.addEventListener('DOMContentLoaded', () => {
-    new CategoriesPage();
+    new MovieListPage();
 });

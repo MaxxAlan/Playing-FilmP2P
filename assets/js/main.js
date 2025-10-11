@@ -8,29 +8,36 @@
   let page = 1;
   let isList = false;
 
-  function movieCard(movie) {
-    const genres = (movie.genre || []).slice(0, 3).map(g => `<span class="tag">${g}</span>`).join('');
+// Thay thế hàm movieCard trong file main.js
+function movieCard(movie) {
+    const genres = (movie.genre || []).map(g => `<span class="tag">${g}</span>`).join('');
+    const movieLink = `movie.html?id=${encodeURIComponent(movie.id)}`;
+
     return html`
       <article class="movie-card">
-        <a href="movie.html?id=${encodeURIComponent(movie.id)}" aria-label="${movie.title}">
+        <div class="card-image">
           <img class="poster" src="${movie.poster}" alt="Poster ${movie.title}" loading="lazy" />
-        </a>
-        <div class="movie-body">
-          <h3 class="movie-title">${movie.title}</h3>
-          <div class="movie-meta">
-            <span>${movie.year ?? ''}</span>
-            <span>• ${movie.duration ?? ''}</span>
-            <span>• ⭐ ${movie.rating ?? ''}</span>
+          <div class="card-overlay">
+            <div class="overlay-content">
+              <div class="overlay-meta">
+                <span>${movie.year || ''}</span> •
+                <span>${movie.duration || ''}</span> •
+                <span class="rating">⭐ ${movie.rating || ''}</span>
+              </div>
+              <div class="overlay-tags">${genres}</div>
+              <div class="overlay-actions">
+                <a class="btn primary" href="${movieLink}">Xem ngay</a>
+              </div>
+            </div>
           </div>
-          <div class="tags">${genres}</div>
-          <div class="actions">
-            <a class="btn primary" href="movie.html?id=${encodeURIComponent(movie.id)}">Xem ngay</a>
-            <a class="btn secondary" href="categories.html?category=${encodeURIComponent(movie.category || '')}">Thể loại</a>
-          </div>
+        </div>
+        <div class="card-base-info">
+          <h3 class="movie-title"><a href="${movieLink}">${movie.title}</a></h3>
+          <p class="movie-year">${movie.year || ''}</p>
         </div>
       </article>
     `;
-  }
+}
 
   function render(reset = false) {
     const host = $('#movies');

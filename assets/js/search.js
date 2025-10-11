@@ -8,21 +8,36 @@
     if (hay.includes(q)) return 1;
     return 0;
   }
+// Thay thế hàm card trong file search.js
+function card(m) {
+    const genres = (m.genre || []).map(g => `<span class="tag">${g}</span>`).join('');
+    const movieLink = `movie.html?id=${encodeURIComponent(m.id)}`;
 
-  function card(m) {
     return html`
       <article class="movie-card">
-        <a href="movie.html?id=${encodeURIComponent(m.id)}">
+        <div class="card-image">
           <img class="poster" src="${m.poster}" alt="Poster ${m.title}" loading="lazy" />
-        </a>
-        <div class="movie-body">
-          <h3 class="movie-title">${m.title}</h3>
-          <div class="movie-meta"><span>${m.year||''}</span><span>• ${m.duration||''}</span><span>• ⭐ ${m.rating||''}</span></div>
-          <div class="tags">${(m.genre||[]).slice(0,3).map(g=>`<span class="tag">${g}</span>`).join('')}</div>
+          <div class="card-overlay">
+            <div class="overlay-content">
+              <div class="overlay-meta">
+                <span>${m.year || ''}</span> •
+                <span>${m.duration || ''}</span> •
+                <span class="rating">⭐ ${m.rating || ''}</span>
+              </div>
+              <div class="overlay-tags">${genres}</div>
+              <div class="overlay-actions">
+                <a class="btn primary" href="${movieLink}">Xem ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-base-info">
+          <h3 class="movie-title"><a href="${movieLink}">${m.title}</a></h3>
+          <p class="movie-year">${m.year || ''}</p>
         </div>
       </article>
     `;
-  }
+}
 
   function render(list) {
     const host = $('#results');
