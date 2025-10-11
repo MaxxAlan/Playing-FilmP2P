@@ -17,7 +17,7 @@ class CategoriesPage {
 
     async loadMovies() {
         try {
-            const response = await fetch('./data/movies.json');
+            const response = await fetch('https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/main/movies.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -153,6 +153,7 @@ class CategoriesPage {
                     <p>${message}</p>
                     <div class="error-actions">
                         <a href="index.html" class="back-to-home">Quay về trang chủ</a>
+                        <br>
                         <button onclick="location.reload()" class="retry-btn">Thử lại</button>
                     </div>
                 </div>

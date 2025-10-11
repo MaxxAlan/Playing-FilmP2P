@@ -80,7 +80,7 @@
     render(true);
   } catch (err) {
     console.error(err);
-    toast('Không thể tải danh sách phim. Kiểm tra data/movies.json', 'error');
+    toast('Không thể tải danh sách phim. Kiểm tra data-movies', 'error');
   }
 })();
 
