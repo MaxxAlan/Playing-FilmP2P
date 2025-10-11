@@ -1,4 +1,4 @@
-\ 🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
+ 🎬 Xem Phim Online - Website Xem Phim Chuyên Nghiệp
 
 Website xem phim online được xây dựng với \*\*static frontend + Google Drive\*\* làm media storage, không cần backend server. Giao diện đẹp mắt, tính năng phong phú như các website xem phim chuyên nghiệp.
 
@@ -40,47 +40,47 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 - Chỉnh sửa/cập nhật nội dung: cập nhật file `movies.json` trong repository REMOTE của bạn rồi push; website sẽ tự động tải dữ liệu mới.
 - Dùng `movie-editor.html` để soạn danh sách, bấm “Tải JSON” để xuất file và upload lên repo REMOTE.
 
-## 🚀 Tính năng chính
+# 🚀 Tính năng chính
 
-\### 🎯 Tính năng cốt lõi
+# 🎯 Tính năng cốt lõi
 
-\- ✅ \*\*Static Frontend\*\*: Host trên GitHub Pages (HTML + CSS + JS tĩnh)
+- ✅ Static Frontend: Host trên GitHub Pages (HTML + CSS + JS tĩnh)
 
-\- ✅ \*\*Google Drive Integration\*\*: Video và hình ảnh lưu trên Google Drive
+- ✅ Google Drive Integration: Video và hình ảnh lưu trên Google Drive
 
-\- ✅ \*\*Responsive Design\*\*: Hoạt động tốt trên mobile và desktop
+- ✅ Responsive Design: Hoạt động tốt trên mobile và desktop
 
-\- ✅ \*\*Multi-page Structure\*\*: Trang chủ, thể loại, tìm kiếm, giới thiệu, liên hệ
+- ✅ Multi-page Structure: Trang chủ, thể loại, tìm kiếm, giới thiệu, liên hệ
 
-\### 🔍 Tìm kiếm \& Lọc nâng cao
+# 🔍 Tìm kiếm \& Lọc nâng cao
 
-\- ✅ \*\*Tìm kiếm thông minh\*\*: Tìm phim theo tên, mô tả, thể loại
+- ✅ Tìm kiếm thông minh: Tìm phim theo tên, mô tả, thể loại
 
-\- ✅ \*\*Bộ lọc nâng cao\*\*: Theo thể loại, năm, đánh giá
+- ✅ Bộ lọc nâng cao: Theo thể loại, năm, đánh giá
 
-\- ✅ \*\*Gợi ý tìm kiếm\*\*: Auto-suggestions khi gõ
+- ✅ Gợi ý tìm kiếm: Auto-suggestions khi gõ
 
-\- ✅ \*\*Sắp xếp\*\*: Theo tên, năm, đánh giá, thời lượng
+- ✅ Sắp xếp: Theo tên, năm, đánh giá, thời lượng
 
-\### 🎨 Giao diện \& Trải nghiệm
+# 🎨 Giao diện \& Trải nghiệm
 
-\- ✅ \*\*Load More\*\*: Pagination với nút "Xem thêm"
+- ✅ Load More: Pagination với nút "Xem thêm"
 
-\- ✅ \*\*Hover Effects\*\*: Hiệu ứng đẹp mắt khi hover
+- ✅ Hover Effects: Hiệu ứng đẹp mắt khi hover
 
-\- ✅ \*\*Loading States\*\*: Animation loading mượt mà
+- ✅ Loading States: Animation loading mượt mà
 
-\### 🎬 Video Player
+# 🎬 Video Player
 
-\- ✅ \*\*Google Drive Player\*\*: Iframe player tích hợp
+- ✅ Google Drive Player: Iframe player tích hợp
 
-\- ✅ \*\*Fullscreen Support\*\*: Toàn màn hình với phím tắt
+- ✅ Fullscreen Support: Toàn màn hình với phím tắt
 
-\### 📱 Responsive \& Mobile
+# 📱 Responsive \& Mobile
 
-\- ✅ \*\*Mobile Optimized\*\*: Tối ưu cho điện thoại
+\- ✅ Mobile Optimized: Tối ưu cho điện thoại
 
-\## 📁 Cấu trúc thư mục
+# 📁 Cấu trúc thư mục
 
 ```
 
@@ -132,55 +132,55 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 ```
 
-\## 🎯 Cách hoạt động
+# 🎯 Cách hoạt động
 
-\### 1. Multi-page Architecture
+ 1. Multi-page Architecture
 
-\- \*\*Trang chủ\*\* (`index.html`): Hiển thị danh sách phim với grid/list view, tìm kiếm cơ bản
+- Trang chủ (`index.html`): Hiển thị danh sách phim với grid/list view, tìm kiếm cơ bản
 
-\- \*\*Thể loại\*\* (`categories.html`): Duyệt phim theo category và genre
+- Thể loại (`categories.html`): Duyệt phim theo category và genre
 
-\- \*\*Tìm kiếm\*\* (`search.html`): Tìm kiếm nâng cao với nhiều bộ lọc
+- Tìm kiếm (`search.html`): Tìm kiếm nâng cao với nhiều bộ lọc
 
-\- \*\*Giới thiệu\*\* (`about.html`): Thông tin về website, đội ngũ, giá trị
+- Giới thiệu (`about.html`): Thông tin về website, đội ngũ, giá trị
 
-\- \*\*Liên hệ\*\* (`contact.html`): Form liên hệ, FAQ, hỗ trợ
+- Liên hệ (`contact.html`): Form liên hệ, FAQ, hỗ trợ
 
-\- \*\*404\*\* (`404.html`): Trang lỗi thân thiện với gợi ý phim
+- 404 (`404.html`): Trang lỗi thân thiện với gợi ý phim
 
-\### 2. Frontend (GitHub Pages)
+# 2. Frontend (GitHub Pages)
 
-\- Host toàn bộ code tĩnh trên GitHub Pages
+- Host toàn bộ code tĩnh trên GitHub Pages
 
-\- Load danh sách phim từ JSON
+- Load danh sách phim từ JSON
 
-\- Render giao diện responsive với CSS Grid/Flexbox
+- Render giao diện responsive với CSS Grid/Flexbox
 
-\- JavaScript modules cho từng trang riêng biệt
+- JavaScript modules cho từng trang riêng biệt
 
-\### 3. Media Storage (Google Drive)
+# 3. Media Storage (Google Drive)
 
-\- Upload video và poster lên Google Drive
+- Upload video và poster lên Google Drive
 
-\- Lấy `driveId` từ link chia sẻ công khai
+- Lấy `driveId` từ link chia sẻ công khai
 
-\- Sử dụng iframe preview để phát video
+- Sử dụng iframe preview để phát video
 
-\- CDN của Google Drive cho tốc độ tải nhanh
+- CDN của Google Drive cho tốc độ tải nhanh
 
-\### 4. Metadata \& Data Management
+# 4. Metadata \& Data Management
 
-\- File `movies.json` (REMOTE) chứa thông tin chi tiết phim
+- File `movies.json` (REMOTE) chứa thông tin chi tiết phim
 
-\- Bao gồm `driveId`, poster URL, mô tả, thể loại, đánh giá; với phim bộ có thêm `episodes`
+- Bao gồm `driveId`, poster URL, mô tả, thể loại, đánh giá; với phim bộ có thêm `episodes`
 
-\- URL parameters để navigation giữa các trang
+- URL parameters để navigation giữa các trang
 
-\## 🛠️ Cài đặt và triển khai
+# 🛠️ Cài đặt và triển khai
 
-\### Bước 1: Chuẩn bị Google Drive
+# Bước 1: Chuẩn bị Google Drive
 
-1\. \*\*Upload video lên Google Drive\*\*:
+1\. Upload video lên Google Drive:
 
 &nbsp; - Tạo thư mục riêng cho videos
 
@@ -188,7 +188,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 &nbsp; - Đặt quyền "Anyone with the link can view"
 
-2\. \*\*Lấy Drive ID\*\*:
+2\. Lấy Drive ID:
 
 &nbsp; ```
 
@@ -198,13 +198,13 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 &nbsp; ```
 
-3\. \*\*Tạo poster/thumbnail\*\*:
+3\. Tạo poster/thumbnail:
 
 &nbsp; - Chụp ảnh màn hình hoặc tìm poster
 
 &nbsp; - Upload lên Google Drive hoặc dùng URL khác
 
-\### Bước 2: Cập nhật movies.json (REMOTE)
+# Bước 2: Cập nhật movies.json (REMOTE)
 
 - Chỉnh sửa file `movies.json` trong repository chứa dữ liệu, sau đó dùng GitHub Raw làm URL để ứng dụng tải về.
 
@@ -450,35 +450,35 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 \- \[ ] \*\*Picture-in-Picture\*\*: PiP mode support
 
-\### 📊 Analytics \& Admin
+# 📊 Analytics \& Admin
 
-\- \[ ] \*\*Google Analytics\*\*: Track user behavior
+\- \[ ] Google Analytics: Track user behavior
 
-\- \[ ] \*\*Admin Panel\*\*: Dashboard quản lý phim
+\- \[ ] Admin Panel: Dashboard quản lý phim
 
-\- \[ ] \*\*Content Management\*\*: Easy add/edit movies
+\- \[ ] Content Management: Easy add/edit movies
 
-\- \[ ] \*\*User Management\*\*: Manage users and permissions
+\- \[ ] User Management: Manage users and permissions
 
-\- \[ ] \*\*Reports\*\*: Viewing statistics, popular movies
+\- \[ ] Reports: Viewing statistics, popular movies
 
-\### 🔧 Technical Enhancements
+# 🔧 Technical Enhancements
 
-\- \[ ] \*\*API Backend\*\*: Node.js/Express backend
+- \[ ] API Backend: Node.js/Express backend
 
-\- \[ ] \*\*Database\*\*: MongoDB/PostgreSQL cho metadata
+- \[ ] Database: MongoDB/PostgreSQL cho metadata
 
-\- \[ ] \*\*CDN\*\*: CloudFlare cho static assets
+- \[ ] CDN: CloudFlare cho static assets
 
-\- \[ ] \*\*Caching\*\*: Redis cho performance
+- \[ ] Caching: Redis cho performance
 
-\- \[ ] \*\*Monitoring\*\*: Error tracking, uptime monitoring
+- \[ ] Monitoring: Error tracking, uptime monitoring
 
-\## 📞 Hỗ trợ
+# 📞 Hỗ trợ
 
-\### 🐛 Troubleshooting
+# 🐛 Troubleshooting
 
-\#### Video không phát được
+# Video không phát được
 
 1\. Kiểm tra Google Drive link có public không
 
@@ -488,7 +488,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Kiểm tra internet connection
 
-\#### Website không load
+# Website không load
 
 1\. Kiểm tra GitHub Pages có hoạt động không
 
@@ -498,7 +498,7 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Clear browser cache
 
-\#### Mobile không responsive
+# Mobile không responsive
 
 1\. Kiểm tra viewport meta tag
 
@@ -508,50 +508,51 @@ Ví dụ cấu trúc phim bộ trong JSON REMOTE:
 
 4\. Kiểm tra touch events
 
-\### 📧 Liên hệ
+# 📧 Liên hệ
 
-\- \*\*Email\*\*: aizasybxitjpvbi@zohomail.com
+- Email: aizasybxitjpvbi@zohomail.com
 
-\- \*\*Email Backup\*\*: manhhoangvipbao@gmail.com
+- Email Backup: manhhoangvipbao@gmail.com
 
-\- \*\*Facebook\*\*: https://www.facebook.com/abcxyz
+- Facebook: https://www.facebook.com/abcxyz
 
-\- \*\*Instagram\*\*: https://www.instagram.com/abcxyz/
+- Instagram: https://www.instagram.com/abcxyz/
 
-\- \*\*TikTok\*\*: https://www.tiktok.com/@abcxyz
+- TikTok: https://www.tiktok.com/@abcxyz
 
-\### 🔧 Technical Support
+# 🔧 Technical Support
 
-\- \*\*GitHub Issues\*\*: Báo bug hoặc feature request
+- GitHub Issues: Báo bug hoặc feature request
 
-\- \*\*Documentation\*\*: Đọc kỹ README này
+- Documentation: Đọc kỹ README này
 
-\- \*\*Community\*\*: Tham gia discussion trong Issues
+- Community: Tham gia discussion trong Issues
 
-\## 📄 License
+# 📄 License
 
 MIT License - Tự do sử dụng và chỉnh sửa cho mục đích cá nhân và thương mại.
 
-\## 🙏 Credits
+# 🙏 Credits
 
-\- \*\*Design\*\*: Modern UI/UX với CSS Grid \& Flexbox
+- Design: Modern UI/UX với CSS Grid \& Flexbox
 
-\- \*\*Icons\*\*: Emoji icons cho simplicity
+- Icons: Emoji icons cho simplicity
 
-\- \*\*Fonts\*\*: System fonts cho performance
+- Fonts: System fonts cho performance
 
-\- \*\*Images\*\*: Placeholder.com cho demo
+- Images: Placeholder.com cho demo
 
-\- \*\*Video\*\*: Google Drive cho hosting
+- Video: Google Drive cho hosting
 
 ---
 
-\*\*🎬 Chúc bạn có trải nghiệm xem phim tuyệt vời!\*\*
+🎬 Chúc bạn có trải nghiệm xem phim tuyệt vời!
 
 \_Website được phát triển bởi Hoang Manh - 2025\_
 
 \## Movie JSON Editor (tool bổ trợ)
-
+  
+TOOL: https://crytals-sc.github.io/json-link/  
 Đã thêm `movie-editor.html` và `assets/js/movie-editor.js` — trang nhập liệu để tạo/biên tập danh sách phim và xuất file `movies.json` để upload lên repository REMOTE.
 
 - Mở `movie-editor.html` bằng trình duyệt.
