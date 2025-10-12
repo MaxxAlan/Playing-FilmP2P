@@ -74,7 +74,7 @@ renderMovies(moviesToRender) {
     }
 
     moviesToRender.forEach(movie => {
-        const movieLink = `player.html?id=${movie.id}`;
+        const movieLink = `movie.html?id=${movie.id}`;
         let tagsHTML = '';
         if (Array.isArray(movie.genre) && movie.genre.length > 0) {
             tagsHTML = movie.genre.map(g => `<span class="tag">${g}</span>`).join('');
