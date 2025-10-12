@@ -49,7 +49,7 @@ Không cần backend server.
 ## 📄 License & Bản quyền
 
 MIT License — dùng & chia sẻ tự do.
-Project open source, cộng đồng có thể đóng góp.
+  Project open source, có thể đóng góp.
 ---
 
 ## ☕ Ủng hộ dự án
