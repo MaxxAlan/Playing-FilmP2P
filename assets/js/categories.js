@@ -1,4 +1,4 @@
-// assets/js/categories.js - PHIÊN BẢN MỚI
+// assets/js/categories.js
 
 class MovieListPage {
     constructor() {

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tìm kiếm</title>
   <link rel="icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header class="site-header">
     <div class="container header-inner">
@@ -19,16 +24,22 @@
   </header>
 
   <main class="container">
-    <section class="toolbar" style="flex-wrap: wrap;">
+    <section class="toolbar">
       <input id="q" type="search" placeholder="Tìm tên hoặc mô tả" />
-      <select id="sort">
-        <option value="relevance">Liên quan</option>
-        <option value="title">Tên (A→Z)</option>
-        <option value="year">Năm (mới→cũ)</option>
-        <option value="rating">Đánh giá (cao→thấp)</option>
-      </select>
+      <div>
+        <label for="sort" class="sr-only">Sắp xếp theo</label>
+        <select id="sort">
+          <option value="relevance">Liên quan</option>
+          <option value="title_asc">Tên (A→Z)</option>
+          <option value="title_desc">Tên (Z→A)</option>
+          <option value="year_desc">Năm (mới→cũ)</option>
+          <option value="year_asc">Năm (cũ→mới)</option>
+          <option value="rating_desc">Đánh giá (cao→thấp)</option>
+          <option value="rating_asc">Đánh giá (thấp→cao)</option>
+        </select>
+      </div>
       <input id="year" type="number" placeholder="Năm" min="1900" max="2100" />
-      <input id="genre" type="search" placeholder="Genre (vd: Sci-Fi)" />
+      <input id="genre" type="search" placeholder="Thể loại (vd: Hành Động, Hài Hước)" />
     </section>
     <section id="results" class="movie-grid"></section>
   </main>
@@ -42,6 +53,5 @@
   <script src="assets/js/utils.js"></script>
   <script src="assets/js/search.js"></script>
 </body>
+
 </html>
-
-
