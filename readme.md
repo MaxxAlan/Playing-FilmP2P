@@ -32,6 +32,11 @@ Không cần backend server.
 2. Soạn / chỉnh `movies.json` (theo schema phim lẻ / phim bộ) → push lên repo JSON remote.
 3. Đẩy front-end code lên GitHub Pages (branch `main`, root) để host tĩnh.
 
+-Bạn có thể cập nhập phim vào web chúng tôi theo đường dẫn dưới đây: https://film-editor-65zdma73h-hoangmanhs-projects.vercel.app/
++ Editor-film: tích hợp AI fetch dữ liệu nhanh chóng cho bạn
++ Bạn cần: chuẩn bị github Token để có thể commit dữ liệu vào kho dữ liệu chung của chúng tôi.
++ Liên hệ admin phát triển để được hỗ trợ kĩ thuật: manhhoangvipbao@gmail.com
+
 ## 📦 Lưu ý & hạn chế
 
 * Giới hạn băng thông Drive (~100-200 GB/ngày/file)
