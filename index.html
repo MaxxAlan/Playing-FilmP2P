@@ -2,65 +2,54 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playing-Film P2P</title>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xem Phim Online</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <header>
-        <h1>Xem Phim Online</h1>
-        <nav>
-            <a href="index.html" class="active">Trang chủ</a>
-            <a href="categories.html">Thể loại</a>
-            <a href="search.html">Tìm kiếm</a>
-            <a href="about.html">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-        </nav>
-    </header>
-    <main>
-        <section class="search-section">
-            <input type="text" id="search-input" placeholder="Tìm kiếm phim...">
-        </section>
-        
-        <section class="controls-section">
-            <div class="filter-buttons">
-                <!-- Filter buttons sẽ được tạo bởi JavaScript -->
-            </div>
-            <div class="sort-container">
-                <!-- Sort dropdown sẽ được tạo bởi JavaScript -->
-            </div>
-        </section>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">🎬 Xem Phim</a>
+      <nav class="nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="categories.html">Thể loại</a>
+        <a href="search.html">Tìm kiếm</a>
+        <a href="about.html">Giới thiệu</a>
+        <a href="contact.html">Liên hệ</a>
+      </nav>
+    </div>
+  </header>
 
-        <aside class="watch-history">
-            <!-- Lịch sử xem sẽ được load từ JavaScript -->
-        </aside>
+  <main class="container">
+    <section class="toolbar">
+      <input id="searchInput" type="search" placeholder="Tìm phim theo tên, mô tả..." />
+      <div class="view-toggle" role="group" aria-label="Chế độ hiển thị">
+        <button id="gridBtn" class="active" aria-pressed="true">Grid</button>
+        <button id="listBtn" aria-pressed="false">List</button>
+      </div>
+    </section>
 
-        <section class="movies-section">
-            <div class="section-header">
-                <h2>Phim mới nhất</h2>
-                <div class="view-options">
-                    <button class="view-btn active" data-view="grid">Grid</button>
-                    <button class="view-btn" data-view="list">List</button>
-                </div>
-            </div>
-            <div class="movies" id="movies-container">
-                <!-- Danh sách phim sẽ được load từ JavaScript -->
-            </div>
-            <div class="load-more-container">
-                <button class="load-more-btn" id="load-more">Xem thêm</button>
-            </div>
-        </section>
-    </main>
-    <footer>
-        &copy; 2025 Xem Phim Online
-    </footer>
-    
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/image-manager.js"></script>
-    <script src="assets/js/main.js"></script>
+    <section id="movies" class="movie-grid" aria-live="polite"></section>
+    <div class="pagination">
+      <button id="loadMoreBtn">Xem thêm</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Xem Phim Online • @Hoang Manh</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
+<!--
+  Trang chủ: Hiển thị danh sách phim từ data/movies.json với grid/list view,
+  tìm kiếm cơ bản và nút "Xem thêm".
+-->
 
 </html>

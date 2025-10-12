@@ -2,87 +2,81 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Không tìm thấy trang - Xem Phim Online</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Không tìm thấy trang</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .empty {
+      text-align: center;
+      padding: 60px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .error-code {
+      font-size: 8em;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 0;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
+    .error-message {
+      font-size: 1.5em;
+      color: var(--text);
+      margin: 24px 0 48px;
+    }
+
+    .suggested-title {
+      font-size: 1.2em;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .home-button {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 32px;
+      font-size: 1.1em;
+      transition: transform 0.2s ease;
+    }
+
+    .home-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .movie-grid {
+      margin: 32px 0;
+    }
+  </style>
 </head>
 
-<body class="error-page">
-    <header>
-        <h1>Xem Phim Online</h1>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="categories.html">Thể loại</a>
-            <a href="search.html">Tìm kiếm</a>
-            <a href="about.html">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="error-section">
-            <div class="error-content">
-                <div class="error-animation">
-                    <div class="error-number">404</div>
-                    <div class="error-icon">🎬</div>
-                </div>
-                
-                <h2>Oops! Trang không tìm thấy</h2>
-                <p>Có vẻ như bộ phim bạn đang tìm kiếm không có trong thư viện của chúng tôi.</p>
-                
-                <div class="error-actions">
-                    <a href="index.html" class="btn-primary">Về trang chủ</a>
-                    <a href="categories.html" class="btn-secondary">Xem thể loại</a>
-                    <button onclick="history.back()" class="btn-secondary">Quay lại</button>
-                </div>
-                
-                <div class="search-suggestion">
-                    <h3>Hoặc tìm kiếm phim yêu thích:</h3>
-                    <div class="search-box">
-                        <input type="text" id="search-input" placeholder="Nhập tên phim...">
-                        <button onclick="searchMovie()" class="search-btn">Tìm kiếm</button>
-                    </div>
-                </div>
-                
-                <div class="popular-movies">
-                    <h3>Phim phổ biến</h3>
-                    <div class="movies-suggestions" id="popular-movies">
-                        <!-- Phim phổ biến sẽ được load từ JavaScript -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Liên kết</h4>
-                <ul>
-                    <li><a href="index.html">Trang chủ</a></li>
-                    <li><a href="categories.html">Thể loại</a></li>
-                    <li><a href="search.html">Tìm kiếm</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Hỗ trợ</h4>
-                <ul>
-                    <li><a href="about.html">Giới thiệu</a></li>
-                    <li><a href="contact.html">Liên hệ</a></li>
-                    <li><a href="#">Trợ giúp</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Thông tin</h4>
-                <p>&copy; 2025 Xem Phim Online. Tất cả quyền được bảo lưu.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/image-manager.js"></script>
-    <script src="assets/js/404.js"></script>
+<body>
+  <main class="container empty">
+    <h1 class="error-code">404</h1>
+    <p class="error-message">Rất tiếc, trang bạn đang tìm kiếm không tồn tại</p>
+    <div class="suggested-content">
+      <h2 class="suggested-title">Có thể bạn sẽ thích những bộ phim này:</h2>
+      <div id="suggest" class="movie-grid"></div>
+    </div>
+    <p><a class="btn primary home-button" href="index.html">← Về trang chủ</a></p>
+  </main>
+  <script src="assets/js/utils.js"></script>
+  <script>
+    (async function () {
+      const { fetchJSON, html, createElementFromHTML } = window.$u;
+      const host = document.getElementById('suggest');
+      try {
+        const data = await fetchJSON('https://raw.githubusercontent.com/crytals-sc/json-link/refs/heads/main/movies.json');
+        data.slice(0, 6).forEach(m => {
+          host.appendChild(createElementFromHTML(html`<article class="movie-card"><a href="movie.html?id=${m.id}"><img class="poster" src="${m.poster}" alt="${m.title}" /></a><div class="movie-body"><h3 class="movie-title">${m.title}</h3></div></article>`));
+        });
+      } catch (e) { }
+    })();
+  </script>
 </body>
 
 </html>
