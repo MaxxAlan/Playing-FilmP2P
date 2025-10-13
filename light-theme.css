@@ -1,0 +1,24 @@
+/* File: maxxalan/playing-filmp2p/Playing-FilmPP-demoUI/light-theme.css */
+
+html:not(.dark) {
+  --color-background: #fdfcff; /* A very light off-white */
+  --color-foreground: #2c0029; /* Dark purple text for contrast */
+  --color-muted: #6a5a69;      /* Muted purple-gray */
+  --color-subtle: #e5e0e5;     /* Light purple-gray */
+
+  --color-card: #ffffff;
+  --color-card-foreground: #2c0029;
+
+  --color-input: #f8f5f8;      /* Lighter input background */
+  --color-border: #dcd7dc;     /* Softer border */
+
+  --color-primary: #8e44ad;    /* Main purple */
+  --color-primary-foreground: #ffffff;
+
+  --color-link: #9335b8;       /* Lighter purple for links */
+  --color-link-hover: #1d0228;
+
+  /* FIX: Updated with your requested colors */
+  --color-header-background: #f140f8;
+  --color-footer-background: #4b0140;
+}

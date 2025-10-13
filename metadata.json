@@ -1,0 +1,5 @@
+{
+  "name": "Xem Phim Online",
+  "description": "Một ứng dụng web phát trực tuyến phim hiện đại, nhanh chóng và nhạy bén được xây dựng bằng React và Tailwind CSS, cho phép người dùng duyệt, tìm kiếm và xem nhiều bộ sưu tập phim đa dạng.",
+  "requestFramePermissions": []
+}

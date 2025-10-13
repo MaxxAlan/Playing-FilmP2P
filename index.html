@@ -3,56 +3,140 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Xem Phim Online</title>
-  <link rel="icon" href="favicon.ico" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Trang web xem phim online miễn phí với giao diện thân thiện và dễ sử dụng." />
+  <meta name="keywords" content="xem phim online, xem phim, phim online, phim miễn phí, phim mới, phim hay" />
+  <meta name="author" content="Hoang Manh" />
+  <link rel="stylesheet" href="/light-theme.css">
+  <link rel="stylesheet" href="/dark-theme.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'var(--color-background)',
+            foreground: 'var(--color-foreground)',
+            muted: 'var(--color-muted)',
+            subtle: 'var(--color-subtle)',
+            card: {
+              DEFAULT: 'var(--color-card)',
+              foreground: 'var(--color-card-foreground)',
+            },
+            input: 'var(--color-input)',
+            border: 'var(--color-border)',
+            primary: {
+              DEFAULT: 'var(--color-primary)',
+              foreground: 'var(--color-primary-foreground)',
+            },
+            link: {
+              DEFAULT: 'var(--color-link)',
+              hover: 'var(--color-link-hover)',
+            },
+            // FIX: Added the new header and footer background colors here
+            'header-background': 'var(--color-header-background)',
+            'footer-background': 'var(--color-footer-background)',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.remove('dark')
+    } else {
+      document.documentElement.classList.add('dark')
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Accessibility class for screen readers */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    @keyframes hero-fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes hero-ken-burns {
+      from {
+        transform: scale(1.1);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes hero-content-fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-hero-fade-in {
+      animation: hero-fade-in 1.5s ease-in-out forwards;
+    }
+
+    .animate-hero-ken-burns {
+      animation: hero-ken-burns 10s ease-out forwards;
+    }
+
+    .animate-hero-content {
+      animation: hero-content-fade-in-up 1s ease-out 0.5s forwards;
+      opacity: 0;
+      /* Start hidden for animation */
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.4",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.24.0"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
 </head>
 
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">🎬 Xem Phim</a>
-      <nav class="nav">
-        <a href="index.html">Trang chủ</a>
-        <a href="categories.html">Thể loại</a>
-        <a href="search.html">Tìm kiếm</a>
-        <a href="about.html">Giới thiệu</a>
-        <a href="contact.html">Liên hệ</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="toolbar">
-      <input id="searchInput" type="search" placeholder="Tìm phim theo tên, mô tả..." />
-      <div class="view-toggle" role="group" aria-label="Chế độ hiển thị">
-        <button id="gridBtn" class="active" aria-pressed="true">Grid</button>
-        <button id="listBtn" aria-pressed="false">List</button>
-      </div>
-    </section>
-
-    <section id="movies" class="movie-grid" aria-live="polite"></section>
-    <div class="pagination">
-      <button id="loadMoreBtn">Xem thêm</button>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 Xem Phim Online • @Hoang Manh</p>
-    </div>
-  </footer>
-
-  <script src="assets/js/utils.js"></script>
-  <script src="assets/js/main.js"></script>
+<body class="bg-background text-foreground transition-colors duration-300">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
 </body>
-<!--
-  Trang chủ: Hiển thị danh sách phim từ data/movies.json với grid/list view,
-  tìm kiếm cơ bản và nút "Xem thêm".
--->
 
 </html>

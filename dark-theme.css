@@ -1,0 +1,24 @@
+/* File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/dark-theme.css */
+
+html.dark {
+  --color-background: #090b10;
+  --color-foreground: #f9fafb; /* Gray 50 */
+  --color-muted: #9ca3af;      /* Gray 400 */
+  --color-subtle: #374151;     /* Gray 700 */
+
+  --color-card: #111827;       /* Gray 900 */
+  --color-card-foreground: #f9fafb;
+
+  --color-input: #1f2937;      /* Gray 800 */
+  --color-border: #4b5563;     /* Gray 600 */
+
+  --color-primary: #06b6d4;    /* Cyan 500 */
+  --color-primary-foreground: #111827;
+
+  --color-link: #22d3ee;       /* Cyan 400 */
+  --color-link-hover: #06b6d4; /* Cyan 500 */
+
+  /* FIX: Added dedicated colors for header and footer */
+  --color-header-background: #090b10; /* Same as main background for a seamless look */
+  --color-footer-background: #111827; /* Slightly lighter for separation */
+}
