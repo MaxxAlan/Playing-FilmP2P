@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMovies } from '../hooks/useMovies';
 import MovieCard from '../components/MovieCard';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
@@ -11,6 +11,7 @@ const SearchPage: React.FC = () => {
   const [year, setYear] = useState('');
   const [genre, setGenre] = useState('');
   const [sort, setSort] = useState('relevance');
+
   const [displayedMovies, setDisplayedMovies] = useState<Movie[]>([]);
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -23,16 +24,24 @@ const SearchPage: React.FC = () => {
         const calculateScore = (movie: Movie, queryText: string): number => {
           const lowerQuery = queryText.toLowerCase();
           if (!lowerQuery) return 1;
+
           let score = 0;
           const lowerTitle = movie.title.toLowerCase();
           const lowerSummary = movie.summary?.toLowerCase() || '';
           const lowerGenres = (movie.genre || []).join(' ').toLowerCase();
+
           if (lowerTitle.includes(lowerQuery)) {
             score += 10;
-            if (lowerTitle.startsWith(lowerQuery)) score += 5;
+            if (lowerTitle.startsWith(lowerQuery)) {
+              score += 5;
+            }
           }
-          if (lowerGenres.includes(lowerQuery)) score += 3;
-          if (lowerSummary.includes(lowerQuery)) score += 2;
+          if (lowerGenres.includes(lowerQuery)) {
+            score += 3;
+          }
+          if (lowerSummary.includes(lowerQuery)) {
+            score += 2;
+          }
           return score;
         };
 
@@ -70,9 +79,9 @@ const SearchPage: React.FC = () => {
     return () => clearTimeout(filterTimeout);
   }, [movies, query, year, genre, sort, isLoading]);
 
+
   if (error) return <p className="text-center text-red-500 mt-10">Error: {error.message}</p>;
 
-  // FIX: Added 'text-foreground' to ensure the select/option text color matches the current theme.
   const inputClass = "w-full px-4 py-3 bg-input border border-border text-foreground rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition";
 
   return (

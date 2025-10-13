@@ -1,0 +1,21 @@
+html.dark {
+  --color-background: #090b10;
+  --color-foreground: #f9fafb; /* slate-50 */
+  --color-muted: #9ca3af;      /* slate-400 */
+  --color-subtle: #374151;     /* slate-700 */
+
+  --color-card: #111827;       /* slate-900 */
+  --color-card-foreground: #f9fafb;
+
+  --color-input: #1f2937;      /* slate-800 */
+  --color-border: #4b5563;     /* slate-600 */
+
+  --color-primary: #06b6d4;    /* cyan-500 */
+  --color-primary-foreground: #111827;
+
+  --color-link: #22d3ee;       /* cyan-400 */
+  --color-link-hover: #06b6d4; /* cyan-500 */
+  
+  --color-header-background: #090b10;
+  --color-footer-background: #111827;
+}

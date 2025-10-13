@@ -1,5 +1,3 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/components/Header.tsx
-
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import MenuIcon from './icons/MenuIcon';
@@ -9,7 +7,6 @@ import ThemeSwitcher from './ThemeSwitcher';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // FIX: Replaced hardcoded colors with theme variables for consistent link styling.
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `font-medium transition-colors duration-200 ${isActive ? 'text-primary' : 'text-muted hover:text-link'}`;
   
@@ -32,6 +29,7 @@ const Header: React.FC = () => {
                 <NavLink to="/" className={navLinkClass}>Trang chủ</NavLink>
                 <NavLink to="/categories" className={navLinkClass}>Thể loại</NavLink>
                 <NavLink to="/search" className={navLinkClass}>Tìm kiếm</NavLink>
+                <NavLink to="/trailers" className={navLinkClass}>Trailers</NavLink>
                 <NavLink to="/about" className={navLinkClass}>Giới thiệu</NavLink>
                 <NavLink to="/contact" className={navLinkClass}>Liên hệ</NavLink>
               </nav>
@@ -59,6 +57,7 @@ const Header: React.FC = () => {
           <NavLink to="/" className={mobileNavLinkClass} onClick={closeMenu}>Trang chủ</NavLink>
           <NavLink to="/categories" className={mobileNavLinkClass} onClick={closeMenu}>Thể loại</NavLink>
           <NavLink to="/search" className={mobileNavLinkClass} onClick={closeMenu}>Tìm kiếm</NavLink>
+          <NavLink to="/trailers" className={mobileNavLinkClass} onClick={closeMenu}>Trailers</NavLink>
           <NavLink to="/about" className={mobileNavLinkClass} onClick={closeMenu}>Giới thiệu</NavLink>
           <NavLink to="/contact" className={mobileNavLinkClass} onClick={closeMenu}>Liên hệ</NavLink>
         </nav>

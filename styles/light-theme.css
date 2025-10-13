@@ -1,0 +1,22 @@
+/* Defines the color palette for the light theme using CSS custom properties. */
+html:not(.dark) {
+  --color-background: #f8fafc; /* slate-50 */
+  --color-foreground: #0f172a; /* slate-900 */
+  --color-muted: #64748b;      /* slate-500 */
+  --color-subtle: #94a3b8;     /* slate-400 */
+
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+
+  --color-input: #f1f5f9;      /* slate-100 */
+  --color-border: #e2e8f0;     /* slate-200 */
+
+  --color-primary: #06b6d4;    /* cyan-500 */
+  --color-primary-foreground: #ffffff;
+
+  --color-link: #0891b2;       /* cyan-600 */
+  --color-link-hover: #06b6d4; /* cyan-500 */
+
+  --color-header-background: #ffffff;
+  --color-footer-background: #f8fafc;
+}

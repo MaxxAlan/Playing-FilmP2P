@@ -39,7 +39,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   
   const pageNumbers = getPageNumbers();
   
-  // FIX: Replaced all hardcoded colors with theme variables for consistent styling.
   const baseButtonClass = "px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 border";
   const activeButtonClass = "bg-primary text-primary-foreground border-primary";
   const inactiveButtonClass = "bg-card text-foreground border-border hover:bg-input hover:border-subtle";

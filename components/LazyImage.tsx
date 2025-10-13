@@ -33,7 +33,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, className, placeholderC
   }, []);
 
   return (
-    <div ref={containerRef} className={`${placeholderClassName} relative bg-slate-300 dark:bg-gray-800 overflow-hidden`}>
+    <div ref={containerRef} className={`${placeholderClassName} relative bg-subtle overflow-hidden`}>
       {isInView && (
         <img
           src={src}

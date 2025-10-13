@@ -1,5 +1,3 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/pages/AboutPage.tsx
-
 import React from 'react';
 
 const FeatureItem: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (

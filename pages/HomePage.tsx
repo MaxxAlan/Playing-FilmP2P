@@ -1,109 +1,87 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/pages/HomePage.tsx
-
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useMovies } from '../hooks/useMovies';
-import MovieCard from '../components/MovieCard';
+import MovieRow from '../components/MovieRow';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
-import Pagination from '../components/Pagination';
 import Hero from '../components/Hero';
 import type { Movie } from '../types';
 
-const PAGE_SIZE = 18;
-const HERO_ROTATION_INTERVAL = 3999; // 4 seconds
+const HERO_ROTATION_INTERVAL = 4000; // 4 seconds
+
+const SkeletonRow = () => (
+  <div className="my-8 md:my-12">
+    <div className="h-8 bg-subtle rounded w-1/4 mb-4 animate-pulse"></div>
+    <div className="flex space-x-4 md:space-x-6">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div key={index} className="flex-shrink-0 w-40 sm:w-44 md:w-48 lg:w-52">
+          <MovieCardSkeleton />
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const HomePage: React.FC = () => {
   const { movies, isLoading, error } = useMovies();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const [featuredMovie, setFeaturedMovie] = useState<Movie | undefined>();
 
+  // Set initial and rotating featured movie
   useEffect(() => {
     if (movies.length > 0) {
       if (!featuredMovie) {
         setFeaturedMovie(movies.find(m => m.id === 1) || movies[0]);
       }
+
       const intervalId = setInterval(() => {
         const randomIndex = Math.floor(Math.random() * movies.length);
         setFeaturedMovie(movies[randomIndex]);
       }, HERO_ROTATION_INTERVAL);
+
       return () => clearInterval(intervalId);
     }
+  }, [movies, featuredMovie]);
+
+  const categorizedMovies = useMemo(() => {
+    if (!movies || movies.length === 0) return {};
+
+    const shuffle = (array: Movie[]) => [...array].sort(() => 0.5 - Math.random());
+
+    const trending = shuffle(movies.filter(m => m.year && m.year >= 2022)).slice(0, 15);
+    const newReleases = shuffle(movies).slice(0, 15);
+    const action = shuffle(movies.filter(m => m.genre?.includes('Hành Động'))).slice(0, 15);
+    const horror = shuffle(movies.filter(m => m.genre?.includes('Kinh Dị'))).slice(0, 15);
+    const comedy = shuffle(movies.filter(m => m.genre?.includes('Hài Hước'))).slice(0, 15);
+
+    return {
+      trending,
+      newReleases,
+      action,
+      horror,
+      comedy,
+    };
   }, [movies]);
-
-  const filteredMovies = useMemo(() => {
-    if (!searchTerm) return movies;
-    return movies.filter(movie =>
-      movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      movie.summary?.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [movies, searchTerm]);
-
-  const totalPages = Math.ceil(filteredMovies.length / PAGE_SIZE);
-  
-  const currentMovies = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    const end = start + PAGE_SIZE;
-    return filteredMovies.slice(start, end);
-  }, [filteredMovies, currentPage]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    const grid = document.getElementById('movie-grid');
-    if (grid) {
-      grid.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   if (error) return <p className="text-center text-red-500 mt-10">Error: {error.message}</p>;
 
   return (
-    <>
+    <div>
       <Hero movie={featuredMovie} key={featuredMovie?.id} />
-      <section className="py-8">
-        <div className="relative">
-          <input
-            id="searchInput"
-            type="search"
-            placeholder="Tìm kiếm phim bạn yêu thích..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1);
-            }}
-            className="w-full pl-12 pr-4 py-4 bg-input border border-border rounded-full focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
-            aria-label="Search movies"
-          />
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none">
-             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-        </div>
-      </section>
-      
-      <h2 className="text-2xl font-bold mb-6 text-foreground scroll-mt-20" id="movie-grid">Phim Mới Cập Nhật</h2>
-      
-      {isLoading && !movies.length ? (
-         <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">
-          {Array.from({ length: PAGE_SIZE }).map((_, index) => (
-            <MovieCardSkeleton key={index} />
-          ))}
-        </section>
-      ) : filteredMovies.length > 0 ? (
+
+      {isLoading ? (
         <>
-          <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">
-            {currentMovies.map(movie => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </section>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <SkeletonRow />
+          <SkeletonRow />
+          <SkeletonRow />
         </>
       ) : (
-        <p className="text-center text-muted mt-10">Không tìm thấy phim nào.</p>
+        <>
+          <MovieRow title="Phim Thịnh Hành" movies={categorizedMovies.trending} />
+          <MovieRow title="Mới Phát Hành" movies={categorizedMovies.newReleases} />
+          <MovieRow title="Phim Hành Động" movies={categorizedMovies.action} />
+          <MovieRow title="Phim Kinh Dị" movies={categorizedMovies.horror} />
+          <MovieRow title="Phim Hài Hước" movies={categorizedMovies.comedy} />
+        </>
       )}
-    </>
+    </div>
   );
 };
 

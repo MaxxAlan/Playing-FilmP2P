@@ -10,6 +10,8 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ThemeProvider } from './contexts/ThemeContext';
+import Chatbot from './components/Chatbot';
+import TrailersPage from './pages/TrailersPage';
 
 const App: React.FC = () => {
   return (
@@ -23,12 +25,14 @@ const App: React.FC = () => {
               <Route path="/movie/:id" element={<MovieDetailPage />} />
               <Route path="/categories" element={<CategoriesPage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/trailers" element={<TrailersPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
           <Footer />
+          <Chatbot />
         </div>
       </HashRouter>
     </ThemeProvider>

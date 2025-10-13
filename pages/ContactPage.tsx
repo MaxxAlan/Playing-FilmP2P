@@ -14,7 +14,7 @@ const ContactPage: React.FC = () => {
 
     try {
       // Nhớ thay thế URL này bằng Form Endpoint duy nhất của bạn từ Formspree
-      const response = await fetch("https://formspree.io/f/your_unique_id", { 
+      const response = await fetch("https://formspree.io/f/mblzpgzw", { 
         method: 'POST',
         body: data,
         headers: {

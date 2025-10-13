@@ -1,20 +1,22 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/pages/CategoriesPage.tsx
-
 import React, { useState, useMemo } from 'react';
 import { useMovies } from '../hooks/useMovies';
 import MovieCard from '../components/MovieCard';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
+import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
+import Spinner from '../components/Spinner';
 
 const CategoriesPage: React.FC = () => {
-  const { movies, isLoading, error } = useMovies();
+  const { movies, isLoading: isLoadingMovies, error } = useMovies();
   const [genreTerm, setGenreTerm] = useState('');
 
   const filteredMovies = useMemo(() => {
+    if (!genreTerm) return movies;
     return movies.filter(movie => {
-      const genreMatch = !genreTerm || (movie.genre || []).some(g => g.toLowerCase().includes(genreTerm.toLowerCase()));
-      return genreMatch;
+      return (movie.genre || []).some(g => g.toLowerCase().includes(genreTerm.toLowerCase()));
     });
   }, [movies, genreTerm]);
+  
+  const { visibleItems, lastElementRef, hasMore, isLoading: isLoadingMore } = useInfiniteScroll(filteredMovies);
 
   if (error) return <p className="text-center text-red-500 mt-10">Error: {error.message}</p>;
 
@@ -36,18 +38,25 @@ const CategoriesPage: React.FC = () => {
         />
       </section>
 
-      {isLoading ? (
+      {isLoadingMovies ? (
         <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">
           {Array.from({ length: 12 }).map((_, index) => (
             <MovieCardSkeleton key={index} />
           ))}
         </section>
-      ) : filteredMovies.length > 0 ? (
-        <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">
-          {filteredMovies.map(movie => (
-            <MovieCard key={movie.id} movie={movie} />
-          ))}
-        </section>
+      ) : visibleItems.length > 0 ? (
+        <>
+          <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-6">
+            {visibleItems.map(movie => (
+                <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </section>
+          <div ref={lastElementRef} style={{ height: '1px' }} />
+          {isLoadingMore && <Spinner />}
+          {!isLoadingMore && !hasMore && visibleItems.length > 0 && (
+            <p className="text-center text-muted mt-10">Đã tải tất cả phim.</p>
+          )}
+        </>
       ) : (
         <p className="text-center text-muted mt-10">Không tìm thấy phim nào phù hợp.</p>
       )}

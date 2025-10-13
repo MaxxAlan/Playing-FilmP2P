@@ -1,11 +1,8 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/components/Footer.tsx
-
 import React from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 
 const Footer: React.FC = () => {
   return (
-    // FIX: Replaced hardcoded colors with theme variables.
     <footer className="border-t border-border mt-16 py-10">
       <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted text-sm space-y-4">
         <div className="flex justify-center mb-6">

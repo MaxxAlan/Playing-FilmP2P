@@ -17,15 +17,16 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return 'dark'; // Default to dark
   });
 
-useEffect(() => {
+  useEffect(() => {
     const root = window.document.documentElement;
     if (theme === 'dark') {
-    root.classList.add('dark');
+      root.classList.add('dark');
     } else {
-    root.classList.remove('dark');
+      root.classList.remove('dark');
     }
     localStorage.setItem('theme', theme);
-}, [theme]);
+  }, [theme]);
+
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };

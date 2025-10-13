@@ -1,5 +1,3 @@
-// File: maxxalan/playing-filmp2p/Playing-FilmP2P-demoUI/pages/NotFoundPage.tsx
-
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useMovies } from '../hooks/useMovies';

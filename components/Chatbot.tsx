@@ -30,7 +30,7 @@ const Chatbot: React.FC = () => {
   const chatbotWindowClass = `
     fixed bottom-24 right-4 sm:right-6 md:right-8 z-50
     w-[calc(100%-2rem)] max-w-sm h-[70vh] max-h-[600px]
-    bg-slate-50 dark:bg-[#08111d] border border-slate-300 dark:border-gray-700
+    bg-card border border-border
     rounded-2xl shadow-2xl flex flex-col
     transition-transform opacity-300 ease-in-out
     ${isOpen ? 'transform-none opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'}
@@ -48,9 +48,9 @@ const Chatbot: React.FC = () => {
 
       <div className={chatbotWindowClass} style={{transform: isOpen ? 'translateY(0)' : 'translateY(2rem)'}}>
         {/* Header */}
-        <header className="p-4 border-b border-slate-200 dark:border-gray-800 flex justify-between items-center flex-shrink-0">
-          <h2 className="font-bold text-lg text-slate-900 dark:text-white">Trợ lý phim AI</h2>
-          <button onClick={toggleChat} aria-label="Close chat" className="text-gray-500 hover:text-gray-800 dark:hover:text-white">
+        <header className="p-4 border-b border-border flex justify-between items-center flex-shrink-0">
+          <h2 className="font-bold text-lg text-foreground">Trợ lý phim AI</h2>
+          <button onClick={toggleChat} aria-label="Close chat" className="text-muted hover:text-foreground">
             <CloseIcon className="w-6 h-6" />
           </button>
         </header>
@@ -67,20 +67,20 @@ const Chatbot: React.FC = () => {
         </div>
 
         {/* Input */}
-        <div className="p-4 border-t border-slate-200 dark:border-gray-800 flex-shrink-0">
+        <div className="p-4 border-t border-border flex-shrink-0">
           <form onSubmit={handleSend} className="flex items-center gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Nhập tin nhắn..."
-              className="flex-1 px-4 py-2 bg-slate-100 dark:bg-[#111318] border border-slate-300 dark:border-gray-700 rounded-full focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none transition"
+              className="flex-1 px-4 py-2 bg-input border border-border rounded-full focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
               aria-label="Chat input"
             />
             <button
               type="submit"
               disabled={isLoading}
-              className="w-10 h-10 flex-shrink-0 bg-cyan-500 text-white rounded-full flex items-center justify-center disabled:opacity-50"
+              className="w-10 h-10 flex-shrink-0 bg-primary text-primary-foreground rounded-full flex items-center justify-center disabled:opacity-50"
               aria-label="Send message"
             >
               <SendIcon className="w-5 h-5" />
