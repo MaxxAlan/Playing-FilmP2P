@@ -115,7 +115,7 @@ Bạn cũng có thể ghé thăm hoặc theo dõi mình qua trang GitHub cá nh�
    - Vào Settings > Pages.
    - Dưới mục Source, chọn Deploy from a branch.
    - Dưới mục Branch, chọn nhánh gh-pages và thư mục /(root), sau đó Save.
-   - Chờ vài phút, trang web của bạn sẽ có tại: https://maxxalan.github.io/Playing-FilmP2P/.
+   - Chờ vài phút, trang web của bạn sẽ có tại: https://user-name.github.io/repo/.
 
 ## 📄 Giấy Phép (License)
 
