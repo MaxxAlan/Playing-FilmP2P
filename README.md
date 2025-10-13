@@ -5,7 +5,9 @@ Một ứng dụng web xem phim được xây dựng bằng React, TypeScript v�
 Truy cập trang demo trực tiếp tại: https://xemphimonline.vercel.app/
 
 Vì không thể trực tiếp cập nhập các bộ phim liên tục, nếu bạn thích bộ phim nào mà chúng tôi chưa có hãy cập nhập nó tại đây:
-https://film-editor-pro.vercel.app/
+
+https://film-editor-pro.vercel.app/ hoặc
+https://crytals-sc.github.io/json-link/
 ## ✨ Tính Năng Nổi Bật
 
 - **Giao Diện Hiện Đại**: Thiết kế sạch sẽ, tập trung vào trải nghiệm người dùng với các hiệu ứng chuyển động mượt mà.
