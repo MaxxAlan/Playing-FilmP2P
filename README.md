@@ -2,7 +2,7 @@
 
 Một ứng dụng web xem phim được xây dựng bằng React, TypeScript và Tailwind CSS, mang đến trải nghiệm duyệt và xem phim nhanh chóng, hiện đại và hoàn toàn responsive.
 
-Truy cập trang demo trực tiếp tại: [https://maxxalan.github.io/Playing-FilmP2P/](https://maxxalan.github.io/Playing-FilmP2P/)
+Truy cập trang demo trực tiếp tại: https://xemphimonline.vercel.app/
 
 ## ✨ Tính Năng Nổi Bật
 
