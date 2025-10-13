@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useChatbot } from '../hooks/useChatbot';
 import ChatIcon from './icons/ChatIcon';
 import CloseIcon from './icons/CloseIcon';
@@ -6,6 +7,7 @@ import SendIcon from './icons/SendIcon';
 import ChatMessageComponent from './ChatMessage';
 
 const Chatbot: React.FC = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const { messages, isLoading, error, sendMessage } = useChatbot();
   const [input, setInput] = useState('');
@@ -17,10 +19,24 @@ const Chatbot: React.FC = () => {
 
   useEffect(scrollToBottom, [messages]);
 
-  const handleSend = (e: React.FormEvent) => {
+  // Xử lý redirect khi có message từ AI
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.sender === 'ai' && lastMessage.type === 'redirect') {
+      const { data } = lastMessage;
+      // Hiển thị message optional nếu có
+      if (data.message) {
+        console.log(data.message); // Hoặc thêm vào UI nếu cần
+      }
+      // Redirect đến trang xem phim
+      navigate(`/movie/${data.movie_id}`);
+    }
+  }, [messages, navigate]);
+
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
-      sendMessage(input);
+      await sendMessage(input);
       setInput('');
     }
   };
@@ -73,6 +89,7 @@ const Chatbot: React.FC = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Nhập tin nhắn..."
               className="flex-1 px-4 py-2 bg-input border border-border rounded-full focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"
               aria-label="Chat input"

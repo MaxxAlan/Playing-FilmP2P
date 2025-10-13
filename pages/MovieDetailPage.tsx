@@ -1,3 +1,5 @@
+// File: maxxalan/playing-filmp2p/Playing-FilmP2P-main/pages/MovieDetailPage.tsx
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMovies } from '../hooks/useMovies';
@@ -6,7 +8,6 @@ import type { Episode } from '../types';
 import RecommendedMovies from '../components/RecommendedMovies';
 import StarIcon from '../components/icons/StarIcon';
 import LazyImage from '../components/LazyImage';
-import PlusIcon from '../components/icons/PlusIcon';
 
 const MovieDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -42,16 +43,21 @@ const MovieDetailPage: React.FC = () => {
 
   return (
     <div className="py-8">
-      <div className="w-full bg-input rounded-lg overflow-hidden shadow-lg border border-border">
+      {/* FIX 1: Thêm aspect-video vào container để đảm bảo tỷ lệ 16:9 responsive */}
+      <div className="w-full bg-input rounded-lg overflow-hidden shadow-lg border border-border aspect-video">
         {playerSrc ? (
             <iframe
                 title={movie.title}
                 src={playerSrc}
-                className="w-full aspect-video border-0"
+                // FIX 2: Đặt kích thước là 100% để lấp đầy container aspect-video
+                className="w-full h-full border-0"
+                // FIX 3: Thêm các thuộc tính toàn màn hình để tối đa hóa khả năng tương thích trên di động/tablet
                 allowFullScreen
+                webkitallowfullscreen="true"
+                mozallowfullscreen="true"
             ></iframe>
         ) : (
-            <div className="w-full aspect-video flex items-center justify-center bg-black text-muted">
+            <div className="w-full h-full flex items-center justify-center bg-black text-muted">
                 Không có nguồn video
             </div>
         )}
@@ -82,12 +88,6 @@ const MovieDetailPage: React.FC = () => {
               ))}
           </div>
           <p className="mt-6 text-muted leading-relaxed">{movie.summary}</p>
-          <div className="mt-6 flex items-center gap-4">
-              <button className="flex items-center justify-center gap-2 px-5 py-2.5 bg-input border border-border rounded-lg text-foreground hover:bg-subtle/50 hover:border-subtle transition">
-                  <PlusIcon className="w-5 h-5"/>
-                  <span className="font-semibold">Thêm vào danh sách</span>
-              </button>
-          </div>
         </div>
       </div>
       

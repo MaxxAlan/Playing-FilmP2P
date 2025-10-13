@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="text-2xl font-bold text-foreground transition-colors duration-200 hover:text-link flex items-center gap-2">
               <span role="img" aria-label="film projector">🎬</span>
-              <span>XemPhim</span>
+              <span>XemPhimOnline</span>
             </Link>
             <div className="flex items-center gap-4">
               <nav className="hidden md:flex md:items-center md:space-x-8">
